@@ -3,10 +3,25 @@ class StoriesController < ApplicationController
 
   def index
     @stories = Story.all
+    respond_to do |format|
+      format.html
+      format.json { render json: @stories }
+    end
   end
 
   def show
     @story = Story.find(params[:id])
+    @pages = @story.pages
+    @links = Link.joins('INNER JOIN pages ON links.dst_page_id=pages.id').where("story_id = ?", params[:id])
+
+    respond_to do |format|
+      format.html {
+        @json =  {pages: @pages, links: @links}.to_json
+      }
+      format.json {
+        render json: "test"
+      }
+    end
 
   end
 
@@ -27,7 +42,13 @@ class StoriesController < ApplicationController
 
   def create
     @story = Story.create(story_params)
-    render plain: @story.to_json
+    render json: @story
+  end
+
+  # this is not actually needed,user can construct request with root_page_id
+  def root_page
+    @root_page = Story.find(params[:id]).root_page
+    render json: @root_page
   end
 
   private
