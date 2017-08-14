@@ -5,8 +5,8 @@ class StoryMaker extends React.Component {
     super(props)
     this.state = {}
   }
-  render(){
 
+  render(){
     //{pages: [],links:[]}
     // console.log(this.props.pages[0].label)
     return (
