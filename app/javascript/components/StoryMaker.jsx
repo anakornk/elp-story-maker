@@ -1,5 +1,5 @@
 import React from 'react'
-
+import HelloMessage from './HelloMessage'
 class StoryMaker extends React.Component {
   constructor(props){
     super(props)
@@ -10,7 +10,7 @@ class StoryMaker extends React.Component {
     //{pages: [],links:[]}
     // console.log(this.props.pages[0].label)
     return (
-      <div>lol</div>
+      <div><HelloMessage/></div>
     )
   }
 }
