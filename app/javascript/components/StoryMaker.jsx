@@ -1,5 +1,5 @@
 import React from 'react'
-import HelloMessage from './HelloMessage'
+import DragBox from './DragBox'
 class StoryMaker extends React.Component {
   constructor(props){
     super(props)
@@ -9,8 +9,10 @@ class StoryMaker extends React.Component {
   render(){
     //{pages: [],links:[]}
     // console.log(this.props.pages[0].label)
+    var settings1 = {x:0,y:0,className: "item-G1"}
+
     return (
-      <div><HelloMessage/></div>
+      <div><DragBox onDrag={(e)=>(e)} position={{x:100,y:100}}/></div>
     )
   }
 }
