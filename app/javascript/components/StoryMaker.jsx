@@ -133,7 +133,12 @@ class StoryMaker extends React.Component {
       return <DragBox settings={page} name={name} key={name} onMove={that.reRender}/>
     });
     //line
-    var links = this.props.links
+    var links = this.props.links;
+    // console.log(links);
+    links = links.filter(function(link){
+      return link.dst_page_id != null
+    });
+
     links = links.map(function(link){
       var src_name = "pageid-"+link.src_page_id + "-" + link.choice_index
       var dst_name = "pageid-"+link.dst_page_id

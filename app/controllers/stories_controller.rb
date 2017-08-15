@@ -12,7 +12,9 @@ class StoriesController < ApplicationController
   def show
     @story = Story.find(params[:id])
     @pages = @story.pages
-    @links = Link.joins('INNER JOIN pages ON links.dst_page_id=pages.id').where("story_id = ?", params[:id])
+    # ALL complete Link.joins('INNER JOIN pages ON links.dst_page_id=pages.id').where("story_id = ?", params[:id])
+    # all links
+    @links = Link.joins('INNER JOIN pages ON links.src_page_id=pages.id').where("story_id = ?", params[:id])
 
     respond_to do |format|
       format.html {
