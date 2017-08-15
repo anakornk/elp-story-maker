@@ -30,7 +30,7 @@ class ShowFormButton extends React.Component {
 
   handleSubmit(event) {
     alert('A name was submitted: ' + this.label.value + ' ' + this.content.value + ' ' + this.question.value);
-    event.preventDefault();
+    // event.preventDefault();
   }
   render(){
     var csrfToken = $('meta[name=csrf-token]').attr('content');
@@ -61,13 +61,15 @@ class ShowFormButton extends React.Component {
                   Question:
                   <input type="text" name="page[question]" ref={(input) => this.question = input} />
                 </label>
+                <input type='hidden' name='page[links_to_attributes][][choice_index]' value='0' />
                 <label>
                   Choice 1:
-                  <input type="text" name="page[question]" ref={(input) => this.question = input} />
+                  <input type="text" name="page[links_to_attributes][][choice_text]" ref={(input) => this.choice0 = input} />
                 </label>
+                <input type='hidden' name='page[links_to_attributes][][choice_index]' value='1' />
                 <label>
                   Choice 2:
-                  <input type="text" name="page[question]" ref={(input) => this.question = input} />
+                  <input type="text" name="page[links_to_attributes][][choice_text]" ref={(input) => this.choice1 = input} />
                 </label>
                 <input type="submit" value="Submit" />
               </form>

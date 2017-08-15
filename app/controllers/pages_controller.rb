@@ -11,11 +11,18 @@ class PagesController < ApplicationController
   end
 
   def create
+
+    # security issue check here?
     @story = Story.find(params[:story_id])
     @page = Page.new(create_page_params)
     @page.story = @story
     if @page.save
-      render plain: @page.to_json
+      create_links_params[:links_to_attributes].each do |link_param|
+        link_param[:src_page_id] = @page.id
+        Link.create(link_param)
+      end
+      redirect_to story_path(@story)
+      # render plain: @page.to_json
     else
       render plain: "error"
     end
@@ -28,6 +35,7 @@ class PagesController < ApplicationController
     @page = Page.find(params[:id])
     @page.update(update_page_params)
     if @page.save
+
       render plain: @page.to_json
     else
       render plain: "error"
@@ -54,7 +62,11 @@ class PagesController < ApplicationController
   private
 
   def create_page_params
-    params.require(:page).permit(:label,:content,:question,:x,:y,links_to_attributes: [:id, :choice_index, :choice_text, :src_page_id, :dst_page_id])
+    params.require(:page).permit(:label,:content,:question,:x,:y)
+  end
+
+  def create_links_params
+    params.require(:page).permit(links_to_attributes: [:id, :choice_index, :choice_text])
   end
 
   def update_page_params
