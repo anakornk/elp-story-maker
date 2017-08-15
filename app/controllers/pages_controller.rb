@@ -24,8 +24,7 @@ class PagesController < ApplicationController
   def update
     # TODO:
     # check if page belongs to story
-    # render json: params
-    # return
+
     @page = Page.find(params[:id])
     @page.update(update_page_params)
     if @page.save
@@ -56,11 +55,11 @@ class PagesController < ApplicationController
   private
 
   def create_page_params
-    params.require(:page).permit(:label,:content,:question,links_to_attributes: [:id, :choice_index, :choice_text, :src_page_id, :dst_page_id])
+    params.require(:page).permit(:label,:content,:question,:x,:y,links_to_attributes: [:id, :choice_index, :choice_text, :src_page_id, :dst_page_id])
   end
 
   def update_page_params
-    params.require(:page).permit(:label,:content,:question,links_to_attributes: [:id, :choice_text, :dst_page_id])
+    params.require(:page).permit(:label,:content,:question,:x,:y,links_to_attributes: [:id, :choice_text, :dst_page_id])
   end
 
 
