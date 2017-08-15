@@ -39,7 +39,7 @@ class App123 extends React.Component {
         <div id="myModal" className="modal">
           <form action='/stories/8/pages' onSubmit={this.handleSubmit} className="modal-content form" method='post' acceptCharset='UTF-8'>
             <span className="close">&times;</span>
-            <input type='hidden' name='_method' value='post' />
+            <input type='hidden' name='_method' value='patch' />
             <input type='hidden' name='utf8' value='✓' />
             <input type='hidden' name='authenticity_token' value={csrfToken} />
             <label>
