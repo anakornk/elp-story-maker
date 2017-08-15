@@ -106,7 +106,7 @@ class DragBox extends React.Component {
           onDrag={this.handleDrag}
           onStop={this.handleStop}
           >
-          <div className={`block ${className}`}>
+          <div className={`block ${className} window`}>
             <div className="handle window-title">{windowTitle}</div>
             <div  className="window-body">
               <div className="content">

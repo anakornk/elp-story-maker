@@ -2,6 +2,85 @@ import React from 'react'
 import DragBox from './DragBox'
 import LineTo, { Line } from 'react-lineto';
 
+
+class ShowFormButton extends React.Component {
+  constructor(props){
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    // Get the modal
+    var modal = document.getElementById('myModal');
+
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var addButton = document.getElementById('add-btn');
+    addButton.addEventListener('click', function(){
+        modal.style.display = "block";
+    });
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on <span> (x), close the modal
+    span.addEventListener('click',function() {
+        modal.style.display = "none";
+    });
+  }
+
+  handleSubmit(event) {
+    alert('A name was submitted: ' + this.label.value + ' ' + this.content.value + ' ' + this.question.value);
+    event.preventDefault();
+  }
+  render(){
+    var csrfToken = $('meta[name=csrf-token]').attr('content');
+    var path = '/stories/' + this.props.storyId +'/pages'
+    return (
+      <div>
+        <a id="add-btn" href="#" className="button button-hang">ADD</a>
+        <div id="myModal" className="modal">
+          <div className="window modal-content">
+            <div className="window-title">
+              Yo
+              <span className="close">&times;</span>
+            </div>
+            <div className="window-body">
+              <form action={path} onSubmit={this.handleSubmit} className="form" method='post' acceptCharset='UTF-8'>
+                <input type='hidden' name='_method' value='post' />
+                <input type='hidden' name='utf8' value='✓' />
+                <input type='hidden' name='authenticity_token' value={csrfToken} />
+                <label>
+                  Label:
+                  <input type="text" name="page[label]" ref={(input) => this.label = input} />
+                </label>
+                <label>
+                  Content:
+                  <input type="text" name="page[content]" ref={(input) => this.content= input} />
+                </label>
+                <label>
+                  Question:
+                  <input type="text" name="page[question]" ref={(input) => this.question = input} />
+                </label>
+                <label>
+                  Choice 1:
+                  <input type="text" name="page[question]" ref={(input) => this.question = input} />
+                </label>
+                <label>
+                  Choice 2:
+                  <input type="text" name="page[question]" ref={(input) => this.question = input} />
+                </label>
+                <input type="submit" value="Submit" />
+              </form>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    );
+  }
+}
+
 class StoryMaker extends React.Component {
 
   constructor(props){
@@ -69,7 +148,7 @@ class StoryMaker extends React.Component {
 
     return (
       <div>
-        <a href="#" className="button button-hang">ADD</a>
+        <ShowFormButton storyId={this.props.story_id}/>
         <div>
           {dragboxes}
           {links}

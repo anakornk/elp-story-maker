@@ -48,7 +48,6 @@ class PagesController < ApplicationController
     # check if page belongs to story
 
     #edit line 55
-
     render json: Page.get_json_with_links(params[:id])
   end
 
