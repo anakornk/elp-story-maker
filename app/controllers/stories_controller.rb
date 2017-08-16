@@ -11,7 +11,7 @@ class StoriesController < ApplicationController
 
   def show
     @story = Story.find(params[:id])
-    @pages = @story.pages
+    @pages = @story.pages.order('pages.id ASC')
     # ALL complete Link.joins('INNER JOIN pages ON links.dst_page_id=pages.id').where("story_id = ?", params[:id])
     # all links
     @links = Link.joins('INNER JOIN pages ON links.src_page_id=pages.id').where("story_id = ?", params[:id]).order('links.id')

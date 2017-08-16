@@ -33,36 +33,78 @@ class SubmitForm extends React.Component {
   }
 
   handleSubmit(event) {
-    alert('A name was submitted: ' + this.label.value + ' ' + this.content.value + ' ' + this.question.value);
-    // event.preventDefault();
-  }
-  render(){
+    event.preventDefault();
+
+    var headers = new Headers();
+    headers.set('Accept','application/json');
+    //headers.set('Content-Type', 'application/json');
+
     var csrfToken = $('meta[name=csrf-token]').attr('content');
-    var path = '/stories/' + this.props.storyId +'/pages';
-    var method = "post";
+
+
+    var label = this.label.value;
+    var content = this.content.value;
+    var question = this.question.value;
+    var choice0 = this.choice0.value;
+    var choice1 = this.choice1.value;
+
+    var path;
+    var method;
     var editPageId = this.props.formSettings.id
-    var hidden0 = (<input type='hidden' name='page[links_to_attributes][][choice_index]' value='0' />);
-    var hidden1 = (<input type='hidden' name='page[links_to_attributes][][choice_index]' value='1' />);
     if(editPageId){
-      path = '/stories/' + this.props.storyId +'/pages/' + editPageId;
-      method = "put";
-      if(this.props.formSettings.choice0Id){
-        var choice0Id = this.props.formSettings.choice0Id;
-        hidden0 = (<input type='hidden' name='page[links_to_attributes][][id]' value={choice0Id} />);
-      }
-      if(this.props.formSettings.choice1Id){
-        var choice1Id = this.props.formSettings.choice1Id;
-        hidden1 = (<input type='hidden' name='page[links_to_attributes][][id]' value={choice1Id} />);
-      }
+      method = "PUT";
+      path = 'http://localhost:3000/stories/' + this.props.storyId +'/pages/' + editPageId;
+    }else{
+      method = "POST";
+      path = 'http://localhost:3000/stories/' + this.props.storyId +'/pages';
     }
 
-    // console.log(this.props.defaultFormData);
-    // if(this.props.defaultFormData){
-    //   console.log("have default");
-    // }else{
-    //   console.log("no default");
-    // }
-    // console.log(this.props.defaultFormData != undefined);
+    var formData = new FormData();
+    formData.append("_method",method);
+    formData.append("utf8","✓");
+    formData.append("authenticity_token",csrfToken);
+    formData.append("page[label]",label);
+    formData.append("page[content]",content);
+    formData.append("page[question]",question);
+    if(editPageId){
+      formData.append("page[links_to_attributes][][id]",this.props.formSettings.choice0Id);
+    }else{
+      formData.append("page[links_to_attributes][][choice_index]",'0');
+    }
+    formData.append("page[links_to_attributes][][choice_text]",choice0);
+    if(editPageId){
+      formData.append("page[links_to_attributes][][id]",this.props.formSettings.choice1Id);
+    }else{
+      formData.append("page[links_to_attributes][][choice_index]",'1');
+    }
+    formData.append("page[links_to_attributes][][choice_text]",choice1);
+
+    var fetchOptions = {
+      method: method,
+      headers,
+      body: formData
+    };
+
+    fetch(path,fetchOptions)
+    .then(function(response) {
+      if (response.status >= 400) {
+        throw new Error("Bad response from server");
+      }
+      return response.json();
+    })
+    .then(function(data) {
+      console.log(data);
+      var modal = document.getElementById('myModal');
+      modal.style.display = "none";
+      location.reload();
+    })
+    .catch(function(error){
+      alert("Oops something is wrong:" + error);
+    });
+
+
+  }
+  render(){
     return (
       <div>
         {this.props.children}
@@ -73,31 +115,26 @@ class SubmitForm extends React.Component {
               <span className="close">&times;</span>
             </div>
             <div className="window-body">
-              <form action={path} onSubmit={this.handleSubmit} className="form" method='post' acceptCharset='UTF-8'>
-                <input type='hidden' name='_method' value={method} />
-                <input type='hidden' name='utf8' value='✓' />
-                <input type='hidden' name='authenticity_token' value={csrfToken} />
+              <form  onSubmit={this.handleSubmit} className="form-popup">
                 <label>
                   Label:
-                  <input type="text" name="page[label]" ref={(input) => this.label = input}/>
+                  <input type="text" ref={(input) => this.label = input}/>
                 </label>
                 <label>
                   Content:
-                  <input type="text" name="page[content]" ref={(input) => this.content= input}/>
+                  <input type="text" ref={(input) => this.content= input}/>
                 </label>
                 <label>
                   Question:
-                  <input type="text" name="page[question]" ref={(input) => this.question = input} />
+                  <input type="text" ref={(input) => this.question = input} />
                 </label>
-                {hidden0}
                 <label>
                   Choice 1:
-                  <input type="text" name="page[links_to_attributes][][choice_text]" ref={(input) => this.choice0 = input} />
+                  <input type="text" ref={(input) => this.choice0 = input} />
                 </label>
-                {hidden1}
                 <label>
                   Choice 2:
-                  <input type="text" name="page[links_to_attributes][][choice_text]" ref={(input) => this.choice1 = input} />
+                  <input type="text" ref={(input) => this.choice1 = input} />
                 </label>
                 <input type="submit" value="Submit" />
               </form>

@@ -21,8 +21,8 @@ class PagesController < ApplicationController
         link_param[:src_page_id] = @page.id
         Link.create(link_param)
       end
-      redirect_to story_path(@story)
-      # render plain: @page.to_json
+      #redirect_to story_path(@story)
+      render plain: @page.to_json
     else
       render plain: "error"
     end

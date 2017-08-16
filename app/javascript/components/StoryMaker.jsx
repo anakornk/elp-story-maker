@@ -9,7 +9,7 @@ class StoryMaker extends React.Component {
 
   constructor(props){
     super(props)
-    this.state = {formSettings:{}, editPageId:null};
+    this.state = {formSettings:{}};
     this.reRender = this.reRender.bind(this);
     this.createLink = this.createLink.bind(this);
     this.setFormSettings = this.setFormSettings.bind(this);
@@ -68,8 +68,6 @@ class StoryMaker extends React.Component {
       buttons.appendChild(button)
     })
 
-    this.setState({});
-
 
     // create link with two clicks
     var that = this;
@@ -98,6 +96,10 @@ class StoryMaker extends React.Component {
       }
     })
 
+
+    setTimeout(function(){
+      that.setState({});
+    },100);
   }
 
   reRender(){
@@ -110,26 +112,26 @@ class StoryMaker extends React.Component {
   }
 
   render(){
-    //{pages: [],links:[]}
-    // console.log(this.props.pages[0].label)
-    // var settings1 = {x:0,y:0,className: "item-G1"}
     var that = this;
 
+
+    //DragBoxes
     // pages set up
     var pages = this.props.pages
     // console.log(pages)
-    pages = pages.sort(function(page1,page2){
-      return page1.id > page2.id
-    })
+
+    // pages = pages.sort(function(page1,page2){
+    //   return page1.id > page2.id
+    // })
 
     var dragboxes = pages.map(function(page){
       //name is used to draw lines and is id of edit
       var name = "pid-"+ page.id;
       return <DragBox storyId={that.props.story_id} settings={page} name={name} key={name} onMove={that.reRender} onEditClick={that.setFormSettings}/>
     });
-    //line
+
+    //Links / Draw Lines
     var links = this.props.links;
-    // console.log(links);
     links = links.filter(function(link){
       return link.dst_page_id != null
     });
@@ -137,9 +139,6 @@ class StoryMaker extends React.Component {
     links = links.map(function(link){
       var src_name = "pid-"+link.src_page_id + "-" + link.id
       var dst_name = "pid-"+link.dst_page_id
-
-      // buttons.appendChild(button);
-
       return (
         <LineTo from={src_name} to={dst_name}
         border="2px solid black" className="line-XYZ"
@@ -147,8 +146,6 @@ class StoryMaker extends React.Component {
         toAnchor="top center" key={src_name} />
       )
     });
-
-    //form settings for add
 
     return (
       <div>
