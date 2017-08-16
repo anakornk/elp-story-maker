@@ -111,15 +111,24 @@ class StoryMaker extends React.Component {
 
     this.setState({});
 
+    var that = this;
     document.body.addEventListener('click',function(e){
       // console.log(e);
       if(e.target.classList.contains('button')){
-        console.log("is button");
-        this.last = e.target
+        // console.log("is button");
+        that.last = e.target
+        that.lastIsButton = true;
       }else if(e.target.classList.contains('window-title')){
-        console.log("is window");
+        // console.log("is window");
+        // console.log(e.target.parentNode.classList[1])
+        if(that.lastIsButton){
+          console.log(that.last.classList[1].split("-")[1] + " " + that.last.classList[1].split("-")[2] + " " + e.target.parentNode.classList[1].split("-")[1]);
+        }
+        that.last = null;
+        that.lastIsButton = false;
       }else {
-        this.last = null;
+        that.last = null;
+        that.lastIsButton = false;
       }
     })
 
