@@ -1,8 +1,11 @@
 <h1>Stories#index</h1>
-<p>Find me in app/views/stories/index.html.erb</p>
-<% @stories.each do |story| %>
-  <div>
-    <%= story.title  %>,<%= story.category %>
-  </div>
-<% end %>
-
+<%= link_to "Create", stories_path,method: :post %>
+<div class="stories-container">
+  <% @stories.each do |story| %>
+    <div class="story-card">
+      <div><%= story.title  %></div>
+      <div><%= story.category %></div>
+      <%= link_to "View",story_path(story) %>
+    </div>
+  <% end %>
+</div>

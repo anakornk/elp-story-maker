@@ -12,11 +12,13 @@ class StoriesController < ApplicationController
   def show
     @story = Story.find(params[:id])
     @pages = @story.pages
-    @links = Link.joins('INNER JOIN pages ON links.dst_page_id=pages.id').where("story_id = ?", params[:id])
+    # ALL complete Link.joins('INNER JOIN pages ON links.dst_page_id=pages.id').where("story_id = ?", params[:id])
+    # all links
+    @links = Link.joins('INNER JOIN pages ON links.src_page_id=pages.id').where("story_id = ?", params[:id])
 
     respond_to do |format|
       format.html {
-        @json =  {pages: @pages, links: @links}.to_json
+        @json =  {pages: @pages, links: @links, story_id: @story.id}.to_json
       }
       format.json {
         render json: "test"
@@ -41,8 +43,19 @@ class StoriesController < ApplicationController
   end
 
   def create
-    @story = Story.create(story_params)
-    render json: @story
+    if params.key? :story
+      whitelisted_params = story_params
+    else
+      whitelisted_params = {title:"Default Story Title",category:"For ben"}
+    end
+    @story = Story.new(whitelisted_params)
+    if @story.save
+      redirect_to story_path(@story)
+    else
+      redirect_to stories_path
+    end
+
+    #render json: @story
   end
 
   # this is not actually needed,user can construct request with root_page_id
@@ -56,4 +69,6 @@ class StoriesController < ApplicationController
   def story_params
     params.require(:story).permit(:title,:root_page_id,:category)
   end
+
+
 end
