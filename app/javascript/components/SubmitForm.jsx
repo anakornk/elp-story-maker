@@ -40,7 +40,7 @@ class SubmitForm extends React.Component {
     var csrfToken = $('meta[name=csrf-token]').attr('content');
     var path = '/stories/' + this.props.storyId +'/pages';
     var method = "post";
-    var editPageId = this.props.formSettings.editPageId;
+    var editPageId = this.props.formSettings.id
     var hidden0 = (<input type='hidden' name='page[links_to_attributes][][choice_index]' value='0' />);
     var hidden1 = (<input type='hidden' name='page[links_to_attributes][][choice_index]' value='1' />);
     if(editPageId){

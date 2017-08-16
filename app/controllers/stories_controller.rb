@@ -16,14 +16,7 @@ class StoriesController < ApplicationController
     # all links
     @links = Link.joins('INNER JOIN pages ON links.src_page_id=pages.id').where("story_id = ?", params[:id]).order('links.id')
 
-    respond_to do |format|
-      format.html {
-        @json =  {pages: @pages, links: @links, story_id: @story.id}.to_json
-      }
-      format.json {
-        render json: "test"
-      }
-    end
+    @json =  {pages: @pages, links: @links, story_id: @story.id}.to_json
 
   end
 

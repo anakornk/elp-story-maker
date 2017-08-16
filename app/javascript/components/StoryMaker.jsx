@@ -52,15 +52,18 @@ class StoryMaker extends React.Component {
     // setInterval(function(){ that.setState(Object.assign({}, that.state)); }, 100);
     var links = this.props.links
     links.forEach(function(link){
-      var src_name = "pageid-"+link.src_page_id
+      var src_name = "pid-"+link.src_page_id
       var buttons = document.querySelector("." + src_name + " .buttons")
-      // console.log(buttons)
-      //
-      var identifier = "pageid-"+link.src_page_id + "-" + link.id
+      var identifier = "pid-"+link.src_page_id + "-" + link.id
 
       var button = document.createElement('div');
-      button.setAttribute("class", "button " + identifier)
       button.innerHTML = link.choice_text
+      button.setAttribute("class", "button " + identifier)
+      if(link.choice_text == ""){
+        button.className += " hidden"
+      }
+      button.setAttribute("data-pageid",link.src_page_id)
+      button.setAttribute("data-linkid",link.id)
       // console.log(button)
       buttons.appendChild(button)
     })
@@ -74,25 +77,23 @@ class StoryMaker extends React.Component {
       // console.log(e);
       if(e.target.classList.contains('button')){
         // console.log("is button");
-        that.last = e.target
+        that.lastObj = e.target
         that.lastIsButton = true;
       }else if(e.target.classList.contains('window-title')){
         // console.log("is window");
         // console.log(e.target.parentNode.classList[1])
         if(that.lastIsButton){
-
-          var temp = that.last.classList[1].split("-");
           var story_id = that.props.story_id
-          var src_page_id = temp[1];
-          var link_id = temp[2];
-          var dst_page_id = e.target.parentNode.classList[1].split("-")[1];
+          var src_page_id = that.lastObj.getAttribute("data-pageid")
+          var link_id =  that.lastObj.getAttribute("data-linkid")
+          var dst_page_id = e.target.parentNode.getAttribute("data-pageid")
           // console.log(src_page_id + " " + link_id + " " + dst_page_id);
           that.createLink(story_id,src_page_id,link_id,dst_page_id)
         }
-        that.last = null;
+        that.lastObj = null;
         that.lastIsButton = false;
       }else {
-        that.last = null;
+        that.lastObj = null;
         that.lastIsButton = false;
       }
     })
@@ -122,7 +123,8 @@ class StoryMaker extends React.Component {
     })
 
     var dragboxes = pages.map(function(page){
-      var name = "pageid-"+ page.id;
+      //name is used to draw lines and is id of edit
+      var name = "pid-"+ page.id;
       return <DragBox storyId={that.props.story_id} settings={page} name={name} key={name} onMove={that.reRender} onEditClick={that.setFormSettings}/>
     });
     //line
@@ -133,8 +135,8 @@ class StoryMaker extends React.Component {
     });
 
     links = links.map(function(link){
-      var src_name = "pageid-"+link.src_page_id + "-" + link.id
-      var dst_name = "pageid-"+link.dst_page_id
+      var src_name = "pid-"+link.src_page_id + "-" + link.id
+      var dst_name = "pid-"+link.dst_page_id
 
       // buttons.appendChild(button);
 
