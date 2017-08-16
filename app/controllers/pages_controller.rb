@@ -46,9 +46,9 @@ class PagesController < ApplicationController
   def destroy
     @page = Page.find(params[:id])
     if @page.destroy
-      render plain: "success"
+      render json: {status: "success"}
     else
-      render plain: "fail"
+      render json: {status: "fail"}
     end
   end
 
