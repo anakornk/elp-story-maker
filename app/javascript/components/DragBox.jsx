@@ -9,6 +9,8 @@ class DragBox extends React.Component {
     this.handleDrag = this.handleDrag.bind(this);
     this.handleStop = this.handleStop.bind(this);
     this.updatePosition = this.updatePosition.bind(this);
+    this.updateStoryRootPage = this.updateStoryRootPage.bind(this);
+    this.deletePage = this.deletePage.bind(this);
     // console.log("start")
     // console.log(props)
     this.state = {position:{x: props.settings.x,y: props.settings.y}}
@@ -57,6 +59,67 @@ class DragBox extends React.Component {
     });
   }
 
+  updateStoryRootPage(){
+    var headers = new Headers();
+    headers.set('Accept','application/json');
+    headers.set('Content-Type', 'application/json');
+
+    var that = this;
+    var url = 'http://localhost:3000/stories/'+ this.props.storyId
+    var payload = {story: {root_page_id: this.props.settings.id}}
+    var fetchOptions = {
+      method: 'PUT',
+      headers,
+      body: JSON.stringify(payload)
+    };
+
+    fetch(url,fetchOptions)
+    .then(function(response) {
+      if (response.status >= 400) {
+        throw new Error("Bad response from server");
+      }
+      return response.json();
+    })
+    .then(function(data) {
+      // console.log(data);
+      console.log("update root_page_id success");
+    })
+    .catch(function(error){
+      alert("Oops something is wrong:" + error);
+    });
+  }
+
+  deletePage(){
+    var headers = new Headers();
+    headers.set('Accept','application/json');
+    headers.set('Content-Type', 'application/json');
+
+    var that = this;
+    var url = 'http://localhost:3000/stories/'+ this.props.storyId + '/pages/' + this.props.settings.id;
+    var fetchOptions = {
+      method: 'DELETE',
+      headers
+    };
+
+    console.log(url);
+
+    fetch(url,fetchOptions)
+    .then(function(response) {
+      if (response.status >= 400) {
+        throw new Error("Bad response from server");
+      }
+      return response.json();
+    })
+    .then(function(data) {
+      // console.log(data);
+      console.log("delete node success");
+      document.location.reload();
+    })
+    .catch(function(error){
+      alert("Oops something is wrong:" + error);
+    });
+
+  }
   handleStart(e: MouseEvent, data: Object){
     // var newPos = {position:{x:data.x,y:data.y}}
     // this.setState(newPos)
@@ -113,11 +176,14 @@ class DragBox extends React.Component {
           <div className={`block ${className} window`} data-pageid={pageId}>
             <div className="handle window-title">
               {windowTitle}
+            </div>
+            <div  className="window-body">
               <ShowFormButton buttonId={className} defaultFormSettings={defaultFormSettings} onClick={this.props.onEditClick}>
                 <span id={className} className="button-edit">Edit</span>
               </ShowFormButton>
-            </div>
-            <div  className="window-body">
+              <div onClick={this.updateStoryRootPage}>Set Root</div>
+              <div onClick={this.deletePage}>Delete</div>
+              <hr/>
               <div className="content">
                 {content}
               </div>

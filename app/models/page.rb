@@ -1,7 +1,9 @@
 class Page < ApplicationRecord
   belongs_to :story
-  has_many :links_to, foreign_key: :src_page_id, class_name: "Link"
-  has_many :links_from, foreign_key: :dst_page_id, class_name: "Link"
+  # TODO validations
+  # delete links_to and links_from
+  has_many :links_to, foreign_key: :src_page_id, class_name: "Link", dependent: :destroy
+  has_many :links_from, foreign_key: :dst_page_id, class_name: "Link", dependent: :nullify
   has_many :children, through: :links_to, source: :child
   has_many :parents, through: :links_from, source: :parent
 
