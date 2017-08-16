@@ -14,6 +14,7 @@ class DragBox extends React.Component {
     this.state = {position:{x: props.settings.x,y: props.settings.y}}
   }
 
+
   updatePosition(x,y) {
     var headers = new Headers();
     // Tell the server we want JSON back
