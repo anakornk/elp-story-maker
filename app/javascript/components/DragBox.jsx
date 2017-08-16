@@ -49,7 +49,7 @@ class DragBox extends React.Component {
       return response.json();
     })
     .then(function(data) {
-      console.log(data)
+      // console.log(data)
     })
     .catch(function(error){
       alert("Oops something is wrong:" + error);
@@ -70,7 +70,7 @@ class DragBox extends React.Component {
   }
 
   handleStop(e: MouseEvent, data: Object){
-    console.log(data)
+    // console.log(data)
     var newPos = {position:{x:data.x,y:data.y}}
     this.setState(newPos)
     this.props.onMove()
@@ -82,7 +82,7 @@ class DragBox extends React.Component {
 
 
   eventLogger = (e: MouseEvent, data: Object) => {
-    console.log('Event: ', e);
+    // console.log('Event: ', e);
     // console.log('Data: ', data);
     // console.log(data.x)
     var newPos = {position:{x:data.x,y:data.y}}
