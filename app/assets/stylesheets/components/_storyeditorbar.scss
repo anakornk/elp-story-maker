@@ -1,0 +1,20 @@
+#editable-title {
+  margin-left: 10px;
+  background-color:rgba(0, 0, 0, 0);
+  color:white;
+  border: none;
+  outline:none;
+  height:30px;
+  width: 200px;
+  -webkit-transition: width 1s, height 1s; /* For Safari 3.1 to 6.0 */
+  transition:width 1s, height 1s;
+}
+
+#editable-title:focus {
+  height:40px;
+  width: 300px;
+  font-size:16px;
+  background-color: white;
+  color: black;
+}
+

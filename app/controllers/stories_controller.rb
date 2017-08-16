@@ -33,13 +33,14 @@ class StoriesController < ApplicationController
     # publish or update story info
     @story = Story.find(params[:id])
     @story.update(story_params)
+    render json: @story
   end
 
   def create
     if params.key? :story
       whitelisted_params = story_params
     else
-      whitelisted_params = {title:"Default Story Title",category:"For ben"}
+      whitelisted_params = {title:"Default Story Title",category:"Young"}
     end
     @story = Story.new(whitelisted_params)
     if @story.save
