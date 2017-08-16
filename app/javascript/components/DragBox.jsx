@@ -1,6 +1,6 @@
 import React from 'react';
 import Draggable from 'react-draggable';
-
+import ShowFormButton from './ShowFormButton';
 
 class DragBox extends React.Component {
   constructor(props){
@@ -33,7 +33,7 @@ class DragBox extends React.Component {
 
     // update
     var that = this;
-    var url = 'http://localhost:3000/stories/2/pages/' + this.props.settings.id;
+    var url = 'http://localhost:3000/stories/'+this.props.storyId+'/pages/' + this.props.settings.id;
 
     var fetchOptions = {
       method: 'PUT',
@@ -57,9 +57,9 @@ class DragBox extends React.Component {
   }
 
   handleStart(e: MouseEvent, data: Object){
-    var newPos = {position:{x:data.x,y:data.y}}
-    this.setState(newPos)
-    this.props.onMove()
+    // var newPos = {position:{x:data.x,y:data.y}}
+    // this.setState(newPos)
+    // this.props.onMove()
 
   }
 
@@ -94,7 +94,8 @@ class DragBox extends React.Component {
   render(){
     var className = this.props.name;
     var windowTitle= this.props.settings.label;
-    var content = this.props.settings.content
+    var content = this.props.settings.content;
+    var defaultFormSettings = this.props.settings;
     return(
           <Draggable
           axis="both"
@@ -107,7 +108,12 @@ class DragBox extends React.Component {
           onStop={this.handleStop}
           >
           <div className={`block ${className} window`}>
-            <div className="handle window-title">{windowTitle}</div>
+            <div className="handle window-title">
+              {windowTitle}
+              <ShowFormButton buttonId={className} defaultFormSettings={defaultFormSettings} onClick={this.props.onEditClick}>
+                <span id={className} className="button-edit">Edit</span>
+              </ShowFormButton>
+            </div>
             <div  className="window-body">
               <div className="content">
                 {content}
