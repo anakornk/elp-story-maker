@@ -14,6 +14,7 @@ class DragBox extends React.Component {
     this.state = {position:{x: props.settings.x,y: props.settings.y}}
   }
 
+
   updatePosition(x,y) {
     var headers = new Headers();
     // Tell the server we want JSON back
@@ -96,6 +97,8 @@ class DragBox extends React.Component {
     var windowTitle= this.props.settings.label;
     var content = this.props.settings.content;
     var defaultFormSettings = this.props.settings;
+    var pageId = this.props.settings.id;
+
     return(
           <Draggable
           axis="both"
@@ -107,7 +110,7 @@ class DragBox extends React.Component {
           onDrag={this.handleDrag}
           onStop={this.handleStop}
           >
-          <div className={`block ${className} window`}>
+          <div className={`block ${className} window`} data-pageid={pageId}>
             <div className="handle window-title">
               {windowTitle}
               <ShowFormButton buttonId={className} defaultFormSettings={defaultFormSettings} onClick={this.props.onEditClick}>

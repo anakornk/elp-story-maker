@@ -9,7 +9,7 @@ Link.delete_all
 Page.delete_all
 Story.delete_all
 
-story1 = Story.create(title:"hi")
+story1 = Story.create(title:"hi",category:"yo")
 page1 = Page.new(label:"page1",content:"page1 content",question:"page1 question", x: 10,y:10)
 page2 = Page.new(label:"page2",content:"page2 content",question:"page2 question",x: 50,y:200)
 page3 = Page.new(label:"page3",content:"page3 content",question:"page3 question",x:60,y:300)
