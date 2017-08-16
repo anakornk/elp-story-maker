@@ -10,8 +10,8 @@ class PagesController < ApplicationController
     render plain: @pages.to_json
   end
 
+  # TODO: ajax
   def create
-
     # security issue check here?
     @story = Story.find(params[:story_id])
     @page = Page.new(create_page_params)
@@ -28,14 +28,15 @@ class PagesController < ApplicationController
     end
   end
 
+  # TODO: change to ajax
   def update
     # TODO:
     # check if page belongs to story
-
+    @story = Story.find(params[:story_id])
     @page = Page.find(params[:id])
     @page.update(update_page_params)
     if @page.save
-
+      #redirect_to story_path(@story)
       render plain: @page.to_json
     else
       render plain: "error"
