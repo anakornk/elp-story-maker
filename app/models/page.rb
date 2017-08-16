@@ -4,6 +4,8 @@ class Page < ApplicationRecord
   has_many :links_from, foreign_key: :dst_page_id, class_name: "Link"
   has_many :children, through: :links_to, source: :child
   has_many :parents, through: :links_from, source: :parent
+  mount_uploader :image, ImageUploader
+
 
   accepts_nested_attributes_for :links_to
   # src page destoryed - links should be destroyed

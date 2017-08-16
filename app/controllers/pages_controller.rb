@@ -2,6 +2,8 @@ class PagesController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def home
+    @story = Story.find(params[:story_id])
+    @page = Page.new
   end
 
   def index
@@ -56,13 +58,16 @@ class PagesController < ApplicationController
   private
 
   def create_page_params
-    params.require(:page).permit(:label,:content,:question,links_to_attributes: [:id, :choice_index, :choice_text, :src_page_id, :dst_page_id])
+    params.require(:page).permit(:label, :content,:question, :image, links_to_attributes: [:id, :choice_index, :choice_text, :src_page_id, :dst_page_id])
   end
 
   def update_page_params
     params.require(:page).permit(:label,:content,:question,links_to_attributes: [:id, :choice_text, :dst_page_id])
   end
 
+  def page_params
+    params.require(:page).permit(:label, :content, :image)
+  end
 
 
 end
