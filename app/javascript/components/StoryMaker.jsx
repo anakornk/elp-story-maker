@@ -92,28 +92,43 @@ class StoryMaker extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({});
     // var that = this;
     // setInterval(function(){ that.setState(Object.assign({}, that.state)); }, 100);
     var links = this.props.links
     links.forEach(function(link){
       var src_name = "pageid-"+link.src_page_id
       var buttons = document.querySelector("." + src_name + " .buttons")
-      console.log(buttons)
+      // console.log(buttons)
       //
       var identifier = "pageid-"+link.src_page_id + "-" + link.choice_index
 
       var button = document.createElement('div');
       button.setAttribute("class", "button " + identifier)
       button.innerHTML = link.choice_text
-      console.log(button)
+      // console.log(button)
       buttons.appendChild(button)
     })
+
+    this.setState({});
+
+    document.body.addEventListener('click',function(e){
+      // console.log(e);
+      if(e.target.classList.contains('button')){
+        console.log("is button");
+        this.last = e.target
+      }else if(e.target.classList.contains('window-title')){
+        console.log("is window");
+      }else {
+        this.last = null;
+      }
+    })
+
   }
 
   reRender(){
     this.setState({});
   }
+
 
   render(){
     //{pages: [],links:[]}
@@ -129,7 +144,7 @@ class StoryMaker extends React.Component {
     })
 
     var dragboxes = pages.map(function(page){
-      var name = "pageid-"+page.id;
+      var name = "pageid-"+ page.id;
       return <DragBox settings={page} name={name} key={name} onMove={that.reRender}/>
     });
     //line

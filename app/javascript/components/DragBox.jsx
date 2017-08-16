@@ -9,8 +9,8 @@ class DragBox extends React.Component {
     this.handleDrag = this.handleDrag.bind(this);
     this.handleStop = this.handleStop.bind(this);
     this.updatePosition = this.updatePosition.bind(this);
-    console.log("start")
-    console.log(props)
+    // console.log("start")
+    // console.log(props)
     this.state = {position:{x: props.settings.x,y: props.settings.y}}
   }
 
