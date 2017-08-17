@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   skip_before_action :verify_authenticity_token
+  skip_before_action :authenticate_user!
 
   def home
 
@@ -7,7 +8,7 @@ class PagesController < ApplicationController
 
 
   def index
-    @story = Story.find(params[:story_id])
+    @story = policy_scope(Story).find(params[:story_id])
     @pages = @story.pages
     @page = Page.new
 
@@ -24,7 +25,7 @@ class PagesController < ApplicationController
     @story = Story.find(params[:story_id])
     @page = Page.new(create_page_params)
     @page.story = @story
-
+    authorize @page
     if @page.save
       links = create_links_params[:links_to_attributes]
       # if links
@@ -46,6 +47,8 @@ class PagesController < ApplicationController
     # check if page belongs to story
     @story = Story.find(params[:story_id])
     @page = Page.find(params[:id])
+
+    authorize @page
     @page.update(update_page_params)
     if @page.save
       #redirect_to story_path(@story)
@@ -57,6 +60,7 @@ class PagesController < ApplicationController
 
   def destroy
     @page = Page.find(params[:id])
+    authorize @page
     if @page.destroy
       render json: {status: "success"}
     else
@@ -68,8 +72,12 @@ class PagesController < ApplicationController
     # TODO:
     # check if page belongs to story
 
+    # NOUSE
+    authorize Page.find(params[:id])
+
+    json = Page.get_json_with_links(params[:id])
     #edit line 55
-    render json: Page.get_json_with_links(params[:id])
+    render json: json
   end
 
   private
@@ -83,7 +91,7 @@ class PagesController < ApplicationController
   end
 
   def update_page_params
-    params.require(:page).permit(:label,:content,:question,:x,:y,links_to_attributes: [:id, :choice_text, :dst_page_id])
+    params.require(:page).permit(:label,:content,:question,:x,:y,:image,links_to_attributes: [:id, :choice_text, :dst_page_id])
   end
 
   def page_params

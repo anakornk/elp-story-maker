@@ -1,8 +1,9 @@
 class StoriesController < ApplicationController
   skip_before_action :verify_authenticity_token
+  skip_before_action :authenticate_user!, only: :update
 
   def index
-    @stories = Story.all
+    @stories = policy_scope(Story).all
     respond_to do |format|
       format.html
       format.json { render json: @stories.where('published = true') }
@@ -11,6 +12,7 @@ class StoriesController < ApplicationController
 
   def show
     @story = Story.find(params[:id])
+    authorize @story
     @pages = @story.pages.order('pages.id ASC')
     # ALL complete Link.joins('INNER JOIN pages ON links.dst_page_id=pages.id').where("story_id = ?", params[:id])
     # all links
@@ -22,16 +24,19 @@ class StoriesController < ApplicationController
 
   def destroy
     @story = Story.find(params[:id])
+    authorize @story
+
     if @story.destroy
-      render plain: "success"
+      render json: {status: "success"}
     else
-      render plain: "fail"
+      render json: {status: "failed"}
     end
   end
 
   def update
     # publish or update story info
     @story = Story.find(params[:id])
+    authorize @story
     @story.update(story_params)
     render json: @story
   end
@@ -43,6 +48,7 @@ class StoriesController < ApplicationController
       whitelisted_params = {title:"Default Story Title",category:"Young"}
     end
     @story = Story.new(whitelisted_params)
+    authorize @story
     if @story.save
       redirect_to story_path(@story)
     else
