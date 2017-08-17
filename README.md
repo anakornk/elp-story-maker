@@ -1,1 +1,6 @@
-Rails app generated with [lewagon/rails-templates](https://github.com/lewagon/rails-templates), created by the [Le Wagon coding bootcamp](https://www.lewagon.com) team.
+#ELP Story Maker
+
+- @anakornk
+- callisonma
+- @choco225
+- @hilltop16
