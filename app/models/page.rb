@@ -28,6 +28,7 @@ class Page < ApplicationRecord
       result_hash[:content] = page.content
       result_hash[:question] = page.question
       result_hash[:created_at] = page.created_at
+      result_hash[:img_url] = page.image.url
       result_hash[:updated_at] = page.updated_at
       result_hash[:story_id] = page.story_id
       result_hash[:links] = page.links_to.order('links.id ASC').map do |link|
