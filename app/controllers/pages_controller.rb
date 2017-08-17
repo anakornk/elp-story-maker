@@ -2,12 +2,20 @@ class PagesController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def home
+
   end
+
 
   def index
     @story = Story.find(params[:story_id])
     @pages = @story.pages
-    render plain: @pages.to_json
+    @page = Page.new
+
+
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render plain: @pages.to_json }
+    end
   end
 
   # TODO: ajax
@@ -63,7 +71,7 @@ class PagesController < ApplicationController
   private
 
   def create_page_params
-    params.require(:page).permit(:label,:content,:question,:x,:y)
+    params.require(:page).permit(:label, :content,:question,:x,:y,:image, links_to_attributes: [:id, :choice_index, :choice_text, :src_page_id, :dst_page_id])
   end
 
   def create_links_params
@@ -74,6 +82,9 @@ class PagesController < ApplicationController
     params.require(:page).permit(:label,:content,:question,:x,:y,links_to_attributes: [:id, :choice_text, :dst_page_id])
   end
 
+  def page_params
+    params.require(:page).permit(:label, :content, :image)
+  end
 
 
 end

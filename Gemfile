@@ -19,6 +19,10 @@ gem 'uglifier'
 gem 'webpacker'
 gem 'react-rails'
 
+gem 'devise'
+gem 'carrierwave'
+gem 'cloudinary'
+
 group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'

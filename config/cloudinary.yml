@@ -1,0 +1,9 @@
+development:
+    cloud_name:  hilltop16
+    api_key:  534254558339247
+    api_secret:  SoWtrcrZNuGjKHUkw3Wr4cOWmyA
+
+production:
+    cloud_name:  hilltop16
+    api_key:  534254558339247
+    api_secret:  SoWtrcrZNuGjKHUkw3Wr4cOWmyA
