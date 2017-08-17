@@ -27,7 +27,7 @@ class Page < ApplicationRecord
       result_hash[:created_at] = page.created_at
       result_hash[:updated_at] = page.updated_at
       result_hash[:story_id] = page.story_id
-      result_hash[:links] = page.links_to.map do |link|
+      result_hash[:links] = page.links_to.order('links.id ASC').map do |link|
         {choice_index: link.choice_index, choice_text: link.choice_text, nextPageId: link.dst_page_id}
       end
     rescue ActiveRecord::RecordNotFound => e
