@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   # get 'pages/stories/:story_id/pages', to: 'pages#home'
   root to: 'pages#home'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
    get "stories/:story_id/pages", to: "pages#index", as: :story_pages#list out all pages of the story
@@ -22,4 +23,9 @@ Rails.application.routes.draw do
   # resources :stories do
   #   resources :pages, except: [:new, :edit], shallow: true
   # end
+
+  # authenticate :user do
+  #   resources :stories, only: [:new, :create, :edit, :update, :destroy]
+  # end
+  # resources :stories, only: [:index, :show]
 end
