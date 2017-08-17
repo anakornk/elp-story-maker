@@ -33,7 +33,6 @@ class SubmitForm extends React.Component {
   }
 
   handleSubmit(event) {
-    event.preventDefault();
 
     var headers = new Headers();
     headers.set('Accept','application/json');
@@ -47,6 +46,7 @@ class SubmitForm extends React.Component {
     var question = this.question.value;
     var choice0 = this.choice0.value;
     var choice1 = this.choice1.value;
+    var image = this.image.value;
 
     var path;
     var method;
@@ -66,6 +66,8 @@ class SubmitForm extends React.Component {
     formData.append("page[label]",label);
     formData.append("page[content]",content);
     formData.append("page[question]",question);
+    formData.append("page[image]",image);
+
     if(editPageId){
       formData.append("page[links_to_attributes][][id]",this.props.formSettings.choice0Id);
     }else{
@@ -96,7 +98,8 @@ class SubmitForm extends React.Component {
       console.log(data);
       var modal = document.getElementById('myModal');
       modal.style.display = "none";
-      location.reload();
+
+      // location.reload();
     })
     .catch(function(error){
       alert("Oops something is wrong:" + error);
@@ -127,6 +130,9 @@ class SubmitForm extends React.Component {
                 <label>
                   Question:
                   <input type="text" ref={(input) => this.question = input} />
+                </label>
+                <label>
+                  <input type="file" ref={(input) => this.image = input}  />
                 </label>
                 <label>
                   Choice 1:
