@@ -53,10 +53,10 @@ class StoriesController < ApplicationController
   end
 
   # this is not actually needed,user can construct request with root_page_id
-  def root_page
-    @root_page = Story.find(params[:id]).root_page
-    render json: @root_page
-  end
+  # def root_page
+  #   @root_page = Story.find(params[:id]).root_page
+  #   render json: @root_page
+  # end
 
   private
 
