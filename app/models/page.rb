@@ -1,4 +1,6 @@
 class Page < ApplicationRecord
+  mount_uploader :image, ImageUploader
+
   belongs_to :story
   has_one :story_id2, foreign_key: "root_page_id", class_name: "Story", dependent: :nullify
 
@@ -8,7 +10,6 @@ class Page < ApplicationRecord
   has_many :links_from, foreign_key: :dst_page_id, class_name: "Link", dependent: :nullify
   has_many :children, through: :links_to, source: :child
   has_many :parents, through: :links_from, source: :parent
-  mount_uploader :image, ImageUploader
 
 
   accepts_nested_attributes_for :links_to

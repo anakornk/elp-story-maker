@@ -10,7 +10,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 20170817032709) do
 
   # These are extensions that must be enabled in order to support this database
@@ -33,9 +32,9 @@ ActiveRecord::Schema.define(version: 20170817032709) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "story_id"
-    t.string "image"
     t.integer "x"
     t.integer "y"
+    t.string "image"
     t.index ["story_id"], name: "index_pages_on_story_id"
   end
 

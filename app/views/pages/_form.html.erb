@@ -15,6 +15,17 @@
     add an image....
     <%= f.file_field :image %>
   </div>
+  <input type="hidden" name="page[links_to_attributes][][choice_index]" value="0">
+  <label>
+  Choice 1:
+  <input type="text" name="page[links_to_attributes][][choice_text]" />
+</label>
+
+  <input type="hidden" name="page[links_to_attributes][][choice_index]" value="1">
+<label>
+  Choice 2:
+  <input type="text" name="page[links_to_attributes][][choice_text]"/>
+</label>
   <%= f.submit %>
 <% end %>
 

@@ -161,6 +161,8 @@ class DragBox extends React.Component {
     var content = this.props.settings.content;
     var defaultFormSettings = this.props.settings;
     var pageId = this.props.settings.id;
+    // var imgUrl = this.props.image.url;
+    var imgUrl = this.props.settings.image.url;
 
     return(
           <Draggable
@@ -187,6 +189,7 @@ class DragBox extends React.Component {
               <div className="content">
                 {content}
               </div>
+              <img src={imgUrl} alt="" width="100px" height="100px"/>
               <div className="buttons">
               </div>
             </div>

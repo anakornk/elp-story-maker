@@ -24,15 +24,19 @@ class PagesController < ApplicationController
     @story = Story.find(params[:story_id])
     @page = Page.new(create_page_params)
     @page.story = @story
+
     if @page.save
-      create_links_params[:links_to_attributes].each do |link_param|
+      links = create_links_params[:links_to_attributes]
+      # if links
+      links.each do |link_param|
         link_param[:src_page_id] = @page.id
         Link.create(link_param)
+      # end
       end
       #redirect_to story_path(@story)
-      render plain: @page.to_json
+      render json: @page
     else
-      render plain: "error"
+      render json: @page.errors
     end
   end
 
@@ -71,7 +75,7 @@ class PagesController < ApplicationController
   private
 
   def create_page_params
-    params.require(:page).permit(:label, :content,:question,:x,:y,:image, links_to_attributes: [:id, :choice_index, :choice_text, :src_page_id, :dst_page_id])
+    params.require(:page).permit(:label, :content,:question,:x,:y,:image)
   end
 
   def create_links_params

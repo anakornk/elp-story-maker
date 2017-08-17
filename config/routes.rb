@@ -10,16 +10,16 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  # get "stories/:story_id/pages", to: "pages#index", as: :story_pages#list out all pages of the story
-  # post 'stories/:story_id/pages', to: "pages#create" #create new page
-  # put 'pages/:id', to: "pages#update" #update the page
-  # delete 'pages/:id', to: "pages#destroy"
-  # get 'pages/:id', to: "pages#show", as: :story_page #show one page info, contains left right Node Info
+   get "stories/:story_id/pages", to: "pages#index", as: :story_pages#list out all pages of the story
+   post 'stories/:story_id/pages', to: "pages#create" #create new page
+   put 'stories/:story_id/pages/:id', to: "pages#update" #update the page
+   delete 'stories/:story_id/:story_id/pages/:id', to: "pages#destroy"
+   get 'stories/:story_id/pages/:id', to: "pages#show", as: :story_page #show one page info, contains left right Node Info
 
   # special for miniprogram
   # get "stories/:id/root_page", to: "stories#root_page" # story maker page
 
-  resources :stories do
-    resources :pages, except: [:new, :edit], shallow: true
-  end
+  # resources :stories do
+  #   resources :pages, except: [:new, :edit], shallow: true
+  # end
 end
