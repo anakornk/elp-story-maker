@@ -8,7 +8,6 @@ Rails.application.routes.draw do
 
   # get 'pages/stories/:story_id/pages', to: 'pages#home'
   root to: 'pages#home'
-  get "story/:story_id/pages", to: "pages#home"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   # get "stories/:story_id/pages", to: "pages#index", as: :story_pages#list out all pages of the story

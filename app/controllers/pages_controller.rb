@@ -2,14 +2,20 @@ class PagesController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def home
-    @story = Story.find(params[:story_id])
-    @page = Page.new
+
   end
+
 
   def index
     @story = Story.find(params[:story_id])
     @pages = @story.pages
-    render plain: @pages.to_json
+    @page = Page.new
+
+
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render plain: @pages.to_json }
+    end
   end
 
   def create
