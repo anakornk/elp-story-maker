@@ -37,8 +37,8 @@ class SubmitForm extends React.Component {
     var headers = new Headers();
     headers.set('Accept','application/json');
     //headers.set('Content-Type', 'application/json');
-
     var csrfToken = $('meta[name=csrf-token]').attr('content');
+    headers.set('X-CSRF-Token',csrfToken)
 
 
     var label = this.label.value;
@@ -60,9 +60,8 @@ class SubmitForm extends React.Component {
     }
 
     var formData = new FormData();
-    formData.append("_method",method);
-    formData.append("utf8","✓");
-    formData.append("authenticity_token",csrfToken);
+    // formData.append("utf8","✓");
+    // formData.append("authenticity_token",csrfToken);
     formData.append("page[label]",label);
     formData.append("page[content]",content);
     formData.append("page[question]",question);
@@ -84,7 +83,8 @@ class SubmitForm extends React.Component {
     var fetchOptions = {
       method: method,
       headers,
-      body: formData
+      body: formData,
+      credentials: 'same-origin'
     };
 
     fetch(path,fetchOptions)
@@ -95,10 +95,8 @@ class SubmitForm extends React.Component {
       return response.json();
     })
     .then(function(data) {
-      console.log(data);
       var modal = document.getElementById('myModal');
       modal.style.display = "none";
-
       location.reload();
     })
     .catch(function(error){

@@ -21,7 +21,8 @@ class DragBox extends React.Component {
     var headers = new Headers();
     // Tell the server we want JSON back
     headers.set('Accept', 'application/json');
-
+    var csrfToken = $('meta[name=csrf-token]').attr('content');
+    headers.set('X-CSRF-Token',csrfToken)
     // 1.2 Form Data
     // We need to properly format the submitted fields.
     // Here we will use the same format the browser submits POST forms.
@@ -41,7 +42,8 @@ class DragBox extends React.Component {
     var fetchOptions = {
       method: 'PUT',
       headers,
-      body: formData
+      body: formData,
+      credentials: 'same-origin'
     };
 
     fetch(url,fetchOptions)
@@ -63,6 +65,8 @@ class DragBox extends React.Component {
     var headers = new Headers();
     headers.set('Accept','application/json');
     headers.set('Content-Type', 'application/json');
+    var csrfToken = $('meta[name=csrf-token]').attr('content');
+    headers.set('X-CSRF-Token',csrfToken)
 
     var that = this;
     var url = 'http://localhost:3000/stories/'+ this.props.storyId
@@ -70,7 +74,8 @@ class DragBox extends React.Component {
     var fetchOptions = {
       method: 'PUT',
       headers,
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payload),
+      credentials: 'same-origin'
     };
 
     fetch(url,fetchOptions)
@@ -93,12 +98,15 @@ class DragBox extends React.Component {
     var headers = new Headers();
     headers.set('Accept','application/json');
     headers.set('Content-Type', 'application/json');
+    var csrfToken = $('meta[name=csrf-token]').attr('content');
+    headers.set('X-CSRF-Token',csrfToken)
 
     var that = this;
     var url = 'http://localhost:3000/stories/'+ this.props.storyId + '/pages/' + this.props.settings.id;
     var fetchOptions = {
       method: 'DELETE',
-      headers
+      headers,
+      credentials: 'same-origin'
     };
 
     console.log(url);
