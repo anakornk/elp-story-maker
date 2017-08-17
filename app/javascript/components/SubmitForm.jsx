@@ -46,7 +46,7 @@ class SubmitForm extends React.Component {
     var question = this.question.value;
     var choice0 = this.choice0.value;
     var choice1 = this.choice1.value;
-    var image = this.image.value;
+    var image = this.image.files[0];
 
     var path;
     var method;
@@ -99,7 +99,7 @@ class SubmitForm extends React.Component {
       var modal = document.getElementById('myModal');
       modal.style.display = "none";
 
-      // location.reload();
+      location.reload();
     })
     .catch(function(error){
       alert("Oops something is wrong:" + error);
