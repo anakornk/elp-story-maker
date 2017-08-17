@@ -23,6 +23,10 @@ gem 'devise'
 gem 'carrierwave'
 gem 'cloudinary'
 
+gem 'mina', '< 1', require: false
+gem 'mina-rsync', require: false
+gem 'mina-scp', require: false
+
 group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
