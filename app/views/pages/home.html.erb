@@ -1,9 +1,17 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<style>
+
+</style>
+
+
+<% if false %>
 <%= react_component("HelloMessage", { name: "Hello" }) %>
 <%= javascript_pack_tag 'hello_react' %>
+<%= javascript_pack_tag 'drag_line' %>
+<% end %>
 
+<p onclick="javascript:alert(1);">hello bla</p>
 
+<%= react_component("App123") %>
 
 
 

@@ -1,7 +1,11 @@
 class Page < ApplicationRecord
   belongs_to :story
-  has_many :links_to, foreign_key: :src_page_id, class_name: "Link"
-  has_many :links_from, foreign_key: :dst_page_id, class_name: "Link"
+  has_one :story_id2, foreign_key: "root_page_id", class_name: "Story", dependent: :nullify
+
+  # TODO validations
+  # delete links_to and links_from
+  has_many :links_to, foreign_key: :src_page_id, class_name: "Link", dependent: :destroy
+  has_many :links_from, foreign_key: :dst_page_id, class_name: "Link", dependent: :nullify
   has_many :children, through: :links_to, source: :child
   has_many :parents, through: :links_from, source: :parent
   mount_uploader :image, ImageUploader
@@ -25,8 +29,8 @@ class Page < ApplicationRecord
       result_hash[:created_at] = page.created_at
       result_hash[:updated_at] = page.updated_at
       result_hash[:story_id] = page.story_id
-      result_hash[:links] = page.links_to.map do |link|
-        {choice_index: link.choice_index, choice_text: link.choice_text, path: "/stories/#{story.id}/pages/#{link.dst_page_id}"}
+      result_hash[:links] = page.links_to.order('links.id ASC').map do |link|
+        {choice_index: link.choice_index, choice_text: link.choice_text, nextPageId: link.dst_page_id}
       end
     rescue ActiveRecord::RecordNotFound => e
       response = {status: "error", message: e}

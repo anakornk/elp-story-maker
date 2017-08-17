@@ -5,17 +5,16 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
-Story.delete_all
-Page.delete_all
 Link.delete_all
+Page.delete_all
+Story.delete_all
 
-story1 = Story.create(title:"hi")
-page1 = Page.new(label:"page1",content:"page1 content",question:"page1 question")
-page2 = Page.new(label:"page2",content:"page2 content",question:"page2 question")
-page3 = Page.new(label:"page3",content:"page3 content",question:"page3 question")
-page4 = Page.new(label:"page4",content:"page4 content",question:"page4 question")
-page5 = Page.new(label:"page5",content:"page5 content",question:"page5 question")
+story1 = Story.create(title:"hi",category:"yo")
+page1 = Page.new(label:"page1",content:"page1 content",question:"page1 question", x: 10,y:10)
+page2 = Page.new(label:"page2",content:"page2 content",question:"page2 question",x: 50,y:200)
+page3 = Page.new(label:"page3",content:"page3 content",question:"page3 question",x:60,y:300)
+page4 = Page.new(label:"page4",content:"page4 content",question:"page4 question",x:10,y:400)
+page5 = Page.new(label:"page5",content:"page5 content",question:"page5 question",x:200,y:10)
 
 page1.story = story1
 page2.story = story1
