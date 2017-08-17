@@ -18,6 +18,8 @@ class PublishButton extends React.Component {
     var headers = new Headers();
     headers.set('Accept','application/json');
     headers.set('Content-Type', 'application/json');
+    var csrfToken = $('meta[name=csrf-token]').attr('content');
+    headers.set('X-CSRF-Token',csrfToken)
 
     var that = this;
     var url = 'http://localhost:3000/stories/'+ this.props.id
@@ -25,7 +27,8 @@ class PublishButton extends React.Component {
     var fetchOptions = {
       method: 'PUT',
       headers,
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payload),
+      credentials: 'same-origin'
     };
 
     fetch(url,fetchOptions)

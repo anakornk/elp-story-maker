@@ -1,26 +1,21 @@
 class PagesController < ApplicationController
-  skip_before_action :verify_authenticity_token
-  skip_before_action :authenticate_user!
-
   def home
-
   end
 
 
   def index
-    @story = policy_scope(Story).find(params[:story_id])
+    @story = Story.find(params[:story_id])
     @pages = @story.pages
     @page = Page.new
-
-
     respond_to do |format|
       format.html { render :index }
-      format.json { render plain: @pages.to_json }
+      format.json { render plain: "@pages.to_json" }
     end
   end
 
   # TODO: ajax
   def create
+
     # security issue check here?
     @story = Story.find(params[:story_id])
     @page = Page.new(create_page_params)
@@ -91,7 +86,7 @@ class PagesController < ApplicationController
   end
 
   def update_page_params
-    params.require(:page).permit(:label,:content,:question,:x,:y,:image,links_to_attributes: [:id, :choice_text, :dst_page_id])
+    params.require(:page).permit(:label,:content,:question,:x,:y,links_to_attributes: [:id, :choice_text, :dst_page_id])
   end
 
   def page_params

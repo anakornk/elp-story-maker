@@ -1,13 +1,7 @@
 class StoriesController < ApplicationController
-  skip_before_action :verify_authenticity_token
-  skip_before_action :authenticate_user!, only: :update
 
   def index
-    @stories = policy_scope(Story).all
-    respond_to do |format|
-      format.html
-      format.json { render json: @stories.where('published = true') }
-    end
+    @stories = policy_scope(Story)
   end
 
   def show
@@ -50,6 +44,7 @@ class StoriesController < ApplicationController
     @story = Story.new(whitelisted_params)
     authorize @story
     if @story.save
+      #render json: params
       redirect_to story_path(@story)
     else
       redirect_to stories_path
