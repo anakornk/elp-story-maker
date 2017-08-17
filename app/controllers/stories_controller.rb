@@ -61,7 +61,7 @@ class StoriesController < ApplicationController
   private
 
   def story_params
-    params.require(:story).permit(:title,:root_page_id,:category)
+    params.require(:story).permit(:title,:root_page_id,:category,:published)
   end
 
 
