@@ -31,7 +31,11 @@ class StoriesController < ApplicationController
     # publish or update story info
     @story = Story.find(params[:id])
     authorize @story
-    @story.update(story_params)
+    if @story.root_page_id
+      @story.update(story_params)
+    else
+      @story.update(story_no_published_params)
+    end
     render json: @story
   end
 
@@ -65,5 +69,8 @@ class StoriesController < ApplicationController
     params.require(:story).permit(:title,:root_page_id,:category,:published)
   end
 
+  def story_no_published_params
+    params.require(:story).permit(:title,:root_page_id,:category)
+  end
 
 end
