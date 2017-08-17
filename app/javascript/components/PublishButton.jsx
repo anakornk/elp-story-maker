@@ -42,6 +42,7 @@ class PublishButton extends React.Component {
       // console.log(data);
       // console.log(data);
       // console.log("update publish");
+      console.log(data);
       that.setState({published: data.published})
     })
     .catch(function(error){
