@@ -34,7 +34,7 @@ class PagesController < ApplicationController
       # end
       end
       #redirect_to story_path(@story)
-      render json: params
+      render json: @page
     else
       render json: @page.errors
     end
