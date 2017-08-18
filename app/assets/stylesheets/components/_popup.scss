@@ -61,7 +61,7 @@
 }
 
 /* The Close Button */
-.close {
+#close1, #close2 {
     position: absolute;
     top: 0px;
     right: 5px;
@@ -71,12 +71,30 @@
     transition: 0.3s;
 }
 
-.close:hover,
-.close:focus {
+#close1:hover,
+#close1:focus,#close2:hover,#close2:focus{
     color: grey;
     text-decoration: none;
     cursor: pointer;
 }
+
+/* The Close Button */
+// .close2 {
+//     position: absolute;
+//     top: 0px;
+//     right: 5px;
+//     color: black;
+//     font-size: 40px;
+//     font-weight: bold;
+//     transition: 0.3s;
+// }
+
+// .close2:hover,
+// .close2:focus {
+//     color: grey;
+//     text-decoration: none;
+//     cursor: pointer;
+// }
 
 /* 100% Image Width on Smaller Screens */
 @media only screen and (max-width: 700px){

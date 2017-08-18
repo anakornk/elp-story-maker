@@ -97,11 +97,13 @@ class SubmitForm extends React.Component {
     .then(function(data) {
       var modal = document.getElementById('myModal');
       modal.style.display = "none";
+      // console.log(data);
       console.log(data);
       location.reload();
     })
     .catch(function(error){
       alert("Oops something is wrong:" + error);
+      //location.reload();
     });
 
 
@@ -114,7 +116,7 @@ class SubmitForm extends React.Component {
           <div className="window modal-content">
             <div className="window-title">
               Yo
-              <span className="close">&times;</span>
+              <span id="close1">&times;</span>
             </div>
             <div className="window-body">
               <form  onSubmit={this.handleSubmit} className="form-popup">

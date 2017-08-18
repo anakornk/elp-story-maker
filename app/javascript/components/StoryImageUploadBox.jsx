@@ -14,19 +14,20 @@ class StoryImageUploadBox extends React.Component {
     var img = document.getElementById('myImg');
     var modalImg = document.getElementById("img01");
     var captionText = document.getElementById("caption");
-    img.onclick = function(){
+    img.addEventListener('click',function(){
         modal.style.display = "block";
         modalImg.src = this.src;
         captionText.innerHTML = this.alt;
-    }
+    });
 
     // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
+    var span = document.getElementById("close2");
 
     // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
+
+    span.addEventListener('click',function() {
         modal.style.display = "none";
-    }
+    });
   }
 
   handleSubmit(event) {
@@ -61,7 +62,7 @@ class StoryImageUploadBox extends React.Component {
       return response.json();
     })
     .then(function(data) {
-      var modal = document.getElementById('myModal');
+      var modal = document.getElementById('imageBoxModal');
       modal.style.display = "none";
       //console.log(data);
       location.reload();
@@ -83,7 +84,7 @@ class StoryImageUploadBox extends React.Component {
       <div>
         <img id="myImg" src={imgUrl} alt={this.props.title} width="50" height="50" />
         <div id="imageBoxModal" className="modal">
-          <span className="close">&times;</span>
+          <span id="close2">&times;</span>
           <div className="modal-content">
             <img id="img01" />
             <form onSubmit={this.handleSubmit}>
