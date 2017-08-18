@@ -1,7 +1,3 @@
-<div class="navbar2">
-  <%= react_component("StoryEditorBar", @story) %>
-  <%= react_component("PublishButton", @story) %>
-  <%= react_component("StoryImageUploadBox", @story) %>
-</div>
+<%= render './layouts/navbar2' %>
 <%= react_component("StoryMaker", @json) %>
 
