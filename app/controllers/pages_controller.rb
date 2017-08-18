@@ -86,7 +86,7 @@ class PagesController < ApplicationController
   end
 
   def update_page_params
-    params.require(:page).permit(:label,:content,:question,:x,:y,links_to_attributes: [:id, :choice_text, :dst_page_id])
+    params.require(:page).permit(:label,:content,:question,:x,:y,:image,links_to_attributes: [:id, :choice_text, :dst_page_id])
   end
 
   def page_params
