@@ -31,14 +31,14 @@ class StoryImageUploadBox extends React.Component {
   }
 
   handleSubmit(event) {
-
+    event.preventDefault()
     var headers = new Headers();
     headers.set('Accept','application/json');
     //headers.set('Content-Type', 'application/json');
     var csrfToken = $('meta[name=csrf-token]').attr('content');
     headers.set('X-CSRF-Token',csrfToken)
 
-    var url = 'http://localhost:3000/stories/'+ this.props.id
+    var url = '/stories/'+ this.props.id
     var method = "PUT";
 
 
@@ -84,10 +84,10 @@ class StoryImageUploadBox extends React.Component {
       <div>
         <img id="myImg" src={imgUrl} alt={this.props.title} width="50" height="50" />
         <div id="imageBoxModal" className="modal">
-          <span id="close2">&times;</span>
-          <div className="modal-content">
-            <img id="img01" />
-            <form onSubmit={this.handleSubmit}>
+          <div className="modal-content flex-vertical">
+            <span id="close2">&times;</span>
+            <img id="img01" width="300px" height="300px"/>
+            <form onSubmit={this.handleSubmit} className="form-popup">
               <label>
                 <input type="file" ref={(input) => this.image = input}  />
               </label>

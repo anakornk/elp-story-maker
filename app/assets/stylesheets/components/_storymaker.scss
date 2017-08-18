@@ -2,7 +2,7 @@
   cursor: pointer;
 /*  text-align: center
 */
-  width: 200px;
+  width: 350px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -19,6 +19,11 @@
   border-top-right-radius: 4px;
   background-color: #24292E;
   color: white;
+  text-align: center;
+}
+
+.window-title-active {
+  background-color: RGBA(197, 47, 36, 1.00);
 }
 
 .window-body {
@@ -26,6 +31,7 @@
   border-bottom-right-radius: 4px;
   box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
   border: 1px solid rgba(0,0,0,0.1);
+  text-align: center;
 }
 
 .container {
@@ -55,6 +61,7 @@
   border-top: 3px solid rgba(0,0,0,0.1);
 }
 .content {
+  padding: 10px;
   color: black;
 }
 
@@ -67,4 +74,28 @@
 
 .hidden {
   display: none;
+}
+
+.window-split {
+  margin: 5px;
+}
+
+#add-btn {
+  border-radius: 50%;
+  font-size: 30px;
+  background-color: RGBA(34, 34, 34, 1.00);
+  color: white;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+#add-btn:hover {
+
+  background-color: RGBA(51, 51, 51, 1.00);
+}
+
+.story-maker {
+  position: relative;
 }

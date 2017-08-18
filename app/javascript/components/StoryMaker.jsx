@@ -24,7 +24,7 @@ class StoryMaker extends React.Component {
     headers.set('X-CSRF-Token',csrfToken)
 
     var that = this;
-    var url = 'http://localhost:3000/stories/'+ story_id+ '/pages/' + src_page_id;
+    var url = '/stories/'+ story_id+ '/pages/' + src_page_id;
     var payload = {page: {links_to_attributes:[{id:link_id ,dst_page_id:dst_page_id}] }}
 
     var fetchOptions = {
@@ -130,7 +130,13 @@ class StoryMaker extends React.Component {
     var dragboxes = pages.map(function(page){
       //name is used to draw lines and is id of edit
       var name = "pid-"+ page.id;
-      return <DragBox storyId={that.props.story_id} settings={page} name={name} key={name} onMove={that.reRender} onEditClick={that.setFormSettings}/>
+      var isRootPage = false;
+      if(page.id == that.props.root_page_id){
+        isRootPage = true;
+      }
+      return (
+        <DragBox storyId={that.props.story_id} settings={page} isRootPage={isRootPage} name={name} key={name} onMove={that.reRender} onEditClick={that.setFormSettings}/>
+      );
     });
 
     //Links / Draw Lines
@@ -151,10 +157,10 @@ class StoryMaker extends React.Component {
     });
 
     return (
-      <div>
+      <div className="story-maker">
         <SubmitForm storyId={this.props.story_id} formSettings={this.state.formSettings}/>
         <ShowFormButton buttonId="add-btn" defaultFormSettings={{}} onClick={this.setFormSettings}>
-          <a id="add-btn" href="#" className="button button-hang">ADD</a>
+          <span id="add-btn">&nbsp;&#x271A;&nbsp;</span>
         </ShowFormButton>
         <div>
           {dragboxes}
