@@ -151,10 +151,10 @@ class StoryMaker extends React.Component {
     });
 
     return (
-      <div>
+      <div className="story-maker">
         <SubmitForm storyId={this.props.story_id} formSettings={this.state.formSettings}/>
         <ShowFormButton buttonId="add-btn" defaultFormSettings={{}} onClick={this.setFormSettings}>
-          <a id="add-btn" href="#" className="button button-hang">ADD</a>
+          <span id="add-btn">&nbsp;&#x271A;&nbsp;</span>
         </ShowFormButton>
         <div>
           {dragboxes}

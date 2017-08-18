@@ -121,26 +121,31 @@ class SubmitForm extends React.Component {
             <div className="window-body">
               <form  onSubmit={this.handleSubmit} className="form-popup">
                 <label>
-                  Label:
+                  Label:<br/>
                   <input type="text" ref={(input) => this.label = input}/>
                 </label>
                 <label>
-                  Content:
-                  <input type="text" ref={(input) => this.content= input}/>
+                  Content:<br/>
+                  <textarea cols="50" rows="8" ref={(input) => this.content= input}></textarea>
                 </label>
                 <label>
-                  Question:
-                  <input type="text" ref={(input) => this.question = input} />
-                </label>
-                <label>
+                  Image/Video:<br/>
                   <input type="file" ref={(input) => this.image = input}  />
                 </label>
                 <label>
-                  Choice 1:
+                  MP3:<br/>
+                  <input type="file" ref={(input) => this.audio = input}  />
+                </label>
+                <label>
+                  Question:<br/>
+                  <input type="text" ref={(input) => this.question = input} />
+                </label>
+                <label>
+                  Choice 1:<br/>
                   <input type="text" ref={(input) => this.choice0 = input} />
                 </label>
                 <label>
-                  Choice 2:
+                  Choice 2:<br/>
                   <input type="text" ref={(input) => this.choice1 = input} />
                 </label>
                 <input type="submit" value="Submit" />

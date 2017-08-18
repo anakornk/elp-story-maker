@@ -84,10 +84,10 @@ class StoryImageUploadBox extends React.Component {
       <div>
         <img id="myImg" src={imgUrl} alt={this.props.title} width="50" height="50" />
         <div id="imageBoxModal" className="modal">
-          <span id="close2">&times;</span>
-          <div className="modal-content">
-            <img id="img01" />
-            <form onSubmit={this.handleSubmit}>
+          <div className="modal-content flex-vertical">
+            <span id="close2">&times;</span>
+            <img id="img01" width="300px" height="300px"/>
+            <form onSubmit={this.handleSubmit} className="form-popup">
               <label>
                 <input type="file" ref={(input) => this.image = input}  />
               </label>

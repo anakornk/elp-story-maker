@@ -167,11 +167,14 @@ class DragBox extends React.Component {
     var className = this.props.name;
     var windowTitle= this.props.settings.label;
     var content = this.props.settings.content;
+    if(content.length > 144) {
+      content = content.slice(0,140) + "..."
+    }
     var defaultFormSettings = this.props.settings;
     var pageId = this.props.settings.id;
     // var imgUrl = this.props.image.url;
     var imgUrl = this.props.settings.image.url;
-
+    var question = this.props.settings.question
     return(
           <Draggable
           axis="both"
@@ -188,16 +191,25 @@ class DragBox extends React.Component {
               {windowTitle}
             </div>
             <div  className="window-body">
-              <ShowFormButton buttonId={className} defaultFormSettings={defaultFormSettings} onClick={this.props.onEditClick}>
-                <span id={className} className="button-edit">Edit</span>
-              </ShowFormButton>
-              <div onClick={this.updateStoryRootPage}>Set Root</div>
-              <div onClick={this.deletePage}>Delete</div>
-              <hr/>
+              <div className="flex-horizontal">
+                <ShowFormButton buttonId={className} defaultFormSettings={defaultFormSettings} onClick={this.props.onEditClick}>
+                  <span id={className} className="button-edit">Edit</span>
+                </ShowFormButton>
+                  |
+                <div onClick={this.updateStoryRootPage}>Root</div>
+                  |
+                <div onClick={this.deletePage}>&#10007;</div>
+              </div>
+
+              <hr className="window-split"/>
               <div className="content">
                 {content}
               </div>
               <img src={imgUrl} alt="" width="100px" height="100px"/>
+              <hr className="window-split"/>
+              <div className="question">
+                {question}
+              </div>
               <div className="buttons">
               </div>
             </div>
