@@ -9,7 +9,7 @@
 .story-card {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   margin: 10px;
   background-color: #E5F3F4;
@@ -17,6 +17,13 @@
   height: 200px;
   box-shadow: 1px 1px 4px;
   border-radius: 10px;
+  background-size: cover !important;
+
+}
+
+.story-card .title {
+  color: white;
+  margin: 10px;
 }
 
 a:hover {

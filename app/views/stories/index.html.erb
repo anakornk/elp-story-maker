@@ -1,10 +1,15 @@
 <%= render './layouts/navbar' %>
 <div class="stories-container">
   <% @stories.each do |story| %>
-    <div class="story-card">
-      <div><%= story.title  %></div>
-      <div><%= story.category %></div>
-      <%= link_to "View",story_path(story) %>
-    </div>
+    <%= link_to story_path(story) do %>
+      <% img_url = story.image.url ? story.image.url : "https://kitt.lewagon.com/placeholder/cities/berlin" %>
+      <div class="story-card" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url('<%= img_url %>');">
+        <div class="title"><%= story.title  %></div>
+        <% if false %>
+        <div><%= story.category %></div>
+        <%= link_to "View",story_path(story) %>
+        <% end %>
+      </div>
+    <% end %>
   <% end %>
 </div>
