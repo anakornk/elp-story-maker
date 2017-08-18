@@ -108,7 +108,7 @@ class StoryEditorBar extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit} >
+      <form onSubmit={this.handleSubmit}>
         <select value={this.state.selectValue} onChange={this.handleSelectChange}>
           <option value="young">Young</option>
           <option value="old">Old</option>
