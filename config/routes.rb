@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   post "stories", to: "stories#create" #create blank story
 
   # get 'pages/stories/:story_id/pages', to: 'pages#home'
-  root to: 'pages#home'
+  root to: 'stories#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
    get "stories/:story_id/pages", to: "pages#index", as: :story_pages#list out all pages of the story
