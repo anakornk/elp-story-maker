@@ -3,7 +3,8 @@
 <!--   <a href="/" class="navbar-wagon-brand">
     <%= image_tag "logo.png" %>
   </a> -->
-  <%= link_to "Create", stories_path,method: :post, class: "btn btn-info" %>
+  <%= react_component("StoryEditorBar", @story) %>
+  <%= react_component("PublishButton", @story) %>
 
   <!-- Right Navigation -->
   <div class="navbar-wagon-right hidden-xs hidden-sm">

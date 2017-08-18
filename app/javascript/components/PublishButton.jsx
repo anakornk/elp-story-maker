@@ -54,7 +54,7 @@ class PublishButton extends React.Component {
     var buttonText = this.state.published ? "Unpublish" : "Publish"
 
     return(
-      <button onClick={this.handleClick}>{buttonText}</button>
+      <button onClick={this.handleClick} className='btn btn-info text-center'>{buttonText}</button>
     );
   }
 }

@@ -16,7 +16,6 @@
     <% if alert %>
       <p class="alert alert-danger"><%= alert %></p>
     <% end %>
-    <%= render 'layouts/navbar' %>
     <%= yield %>
     <%= javascript_include_tag 'application' %>
     <script>
