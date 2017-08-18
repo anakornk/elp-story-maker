@@ -22,7 +22,7 @@ class PublishButton extends React.Component {
     headers.set('X-CSRF-Token',csrfToken)
 
     var that = this;
-    var url = 'http://localhost:3000/stories/'+ this.props.id
+    var url = '/stories/'+ this.props.id
     var payload = {story: { published: !this.state.published}}
     var fetchOptions = {
       method: 'PUT',

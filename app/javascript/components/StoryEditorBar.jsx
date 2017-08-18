@@ -47,7 +47,7 @@ class StoryEditorBar extends React.Component {
     headers.set('X-CSRF-Token',csrfToken)
 
     var that = this;
-    var url = 'http://localhost:3000/stories/'+ this.props.id
+    var url = '/stories/'+ this.props.id
     var payload = {authenticity_token: csrfToken,story: {title: title}}
     var fetchOptions = {
       method: 'PUT',
@@ -81,7 +81,7 @@ class StoryEditorBar extends React.Component {
     headers.set('X-CSRF-Token',csrfToken)
 
     var that = this;
-    var url = 'http://localhost:3000/stories/'+ this.props.id
+    var url = '/stories/'+ this.props.id
     var payload = {story: {category: category}}
     var fetchOptions = {
       method: 'PUT',

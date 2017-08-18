@@ -12,7 +12,7 @@ class StoriesController < ApplicationController
     # all links
     @links = Link.joins('INNER JOIN pages ON links.src_page_id=pages.id').where("story_id = ?", params[:id]).order('links.id')
 
-    @json =  {pages: @pages, links: @links, story_id: @story.id}.to_json
+    @json =  {pages: @pages, links: @links, story_id: @story.id, root_page_id: @story.root_page_id}.to_json
 
   end
 

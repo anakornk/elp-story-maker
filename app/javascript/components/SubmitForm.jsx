@@ -34,6 +34,7 @@ class SubmitForm extends React.Component {
 
   handleSubmit(event) {
 
+    event.preventDefault()
     var headers = new Headers();
     headers.set('Accept','application/json');
     //headers.set('Content-Type', 'application/json');
@@ -53,10 +54,10 @@ class SubmitForm extends React.Component {
     var editPageId = this.props.formSettings.id
     if(editPageId){
       method = "PUT";
-      path = 'http://localhost:3000/stories/' + this.props.storyId +'/pages/' + editPageId;
+      path = '/stories/' + this.props.storyId +'/pages/' + editPageId;
     }else{
       method = "POST";
-      path = 'http://localhost:3000/stories/' + this.props.storyId +'/pages';
+      path = '/stories/' + this.props.storyId +'/pages';
     }
 
     var formData = new FormData();
@@ -84,8 +85,9 @@ class SubmitForm extends React.Component {
       method: method,
       headers,
       body: formData,
-      credentials: 'same-origin'
+      credentials: 'same-origin',
     };
+    var modal = document.getElementById('myModal');
 
     fetch(path,fetchOptions)
     .then(function(response) {

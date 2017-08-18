@@ -31,14 +31,14 @@ class StoryImageUploadBox extends React.Component {
   }
 
   handleSubmit(event) {
-
+    event.preventDefault()
     var headers = new Headers();
     headers.set('Accept','application/json');
     //headers.set('Content-Type', 'application/json');
     var csrfToken = $('meta[name=csrf-token]').attr('content');
     headers.set('X-CSRF-Token',csrfToken)
 
-    var url = 'http://localhost:3000/stories/'+ this.props.id
+    var url = '/stories/'+ this.props.id
     var method = "PUT";
 
 

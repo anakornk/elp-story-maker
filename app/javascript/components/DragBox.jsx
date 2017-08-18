@@ -37,7 +37,7 @@ class DragBox extends React.Component {
 
     // update
     var that = this;
-    var url = 'http://localhost:3000/stories/'+this.props.storyId+'/pages/' + this.props.settings.id;
+    var url = '/stories/'+this.props.storyId+'/pages/' + this.props.settings.id;
 
     var fetchOptions = {
       method: 'PUT',
@@ -69,7 +69,7 @@ class DragBox extends React.Component {
     headers.set('X-CSRF-Token',csrfToken)
 
     var that = this;
-    var url = 'http://localhost:3000/stories/'+ this.props.storyId
+    var url = '/stories/'+ this.props.storyId
     var payload = {story: {root_page_id: this.props.settings.id}}
     var fetchOptions = {
       method: 'PUT',
@@ -102,7 +102,7 @@ class DragBox extends React.Component {
     headers.set('X-CSRF-Token',csrfToken)
 
     var that = this;
-    var url = 'http://localhost:3000/stories/'+ this.props.storyId + '/pages/' + this.props.settings.id;
+    var url = '/stories/'+ this.props.storyId + '/pages/' + this.props.settings.id;
     var fetchOptions = {
       method: 'DELETE',
       headers,
@@ -174,7 +174,13 @@ class DragBox extends React.Component {
     var pageId = this.props.settings.id;
     // var imgUrl = this.props.image.url;
     var imgUrl = this.props.settings.image.url;
-    var question = this.props.settings.question
+    var question = this.props.settings.question;
+
+    var window_title_className = "handle window-title";
+    if(this.props.isRootPage){
+      window_title_className += " window-title-active";
+    }
+
     return(
           <Draggable
           axis="both"
@@ -187,7 +193,7 @@ class DragBox extends React.Component {
           onStop={this.handleStop}
           >
           <div className={`block ${className} window`} data-pageid={pageId}>
-            <div className="handle window-title">
+            <div className={window_title_className}>
               {windowTitle}
             </div>
             <div  className="window-body">
