@@ -8,7 +8,7 @@ require "mina/scp"
 
 @root_path = '/var/www/elp'
 
-set :domain, '101.37.31.161'
+set :domain, 'wagon'
 set :deploy_to, @root_path
 # set :repository, 'https://github.com/kwnath/seeme.git'
 
