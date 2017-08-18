@@ -28,4 +28,6 @@ Rails.application.routes.draw do
   #   resources :stories, only: [:new, :create, :edit, :update, :destroy]
   # end
   # resources :stories, only: [:index, :show]
+
+
 end

@@ -1,6 +1,7 @@
 class StoriesController < ApplicationController
   skip_before_action :verify_authenticity_token
   # before_filter :authenticate_user!, only: [:new, :edit, :update, :destroy, :update]
+  skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
     @stories = Story.all
