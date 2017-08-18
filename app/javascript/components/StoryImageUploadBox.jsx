@@ -75,7 +75,7 @@ class StoryImageUploadBox extends React.Component {
 
 
   render(){
-    var imgUrl = "https://www.w3schools.com/howto/img_fjords.jpg"
+    var imgUrl = "https://www.baidu.com/img/bd_logo1.png"
     if(this.props.image.url){
       imgUrl = this.props.image.url
     }
