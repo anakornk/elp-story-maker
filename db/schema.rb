@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170819153137) do
+ActiveRecord::Schema.define(version: 20170819165615) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20170819153137) do
     t.integer "y"
     t.string "image"
     t.string "image_video"
+    t.string "audio"
     t.index ["story_id"], name: "index_pages_on_story_id"
   end
 

@@ -1,5 +1,6 @@
 class Page < ApplicationRecord
   mount_uploader :image_video, ImageVideoUploader
+  mount_uploader :audio, AudioUploader
 
   belongs_to :story
   has_one :story_id2, foreign_key: "root_page_id", class_name: "Story", dependent: :nullify
