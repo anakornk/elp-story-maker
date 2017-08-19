@@ -11,7 +11,11 @@ class PublishButton extends React.Component {
   }
 
   handleClick(e){
-    this.changeStoryStatus();
+    if(document.querySelector(".window-title-active")){
+      this.changeStoryStatus();
+    }else{
+      alert('Please set a root page');
+    }
   }
 
   changeStoryStatus(){

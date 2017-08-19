@@ -87,6 +87,7 @@ class DragBox extends React.Component {
     })
     .then(function(data) {
       // console.log(data);
+      that.props.updatedRoot();
       console.log("update root_page_id success");
     })
     .catch(function(error){
