@@ -177,7 +177,7 @@ class DragBox extends React.Component {
     var defaultFormSettings = this.props.settings;
     var pageId = this.props.settings.id;
     // var imgUrl = this.props.image.url;
-    var imgUrl = this.props.settings.image.url;
+    var imgUrl = this.props.settings.image_video.url;
     var question = this.props.settings.question;
 
     var window_title_className = "handle window-title";
