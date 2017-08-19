@@ -96,6 +96,9 @@ class DragBox extends React.Component {
   }
 
   deletePage(){
+    if(!confirm("Are you sure you want to delte this page?")) {
+      return;
+    }
     var headers = new Headers();
     headers.set('Accept','application/json');
     headers.set('Content-Type', 'application/json');
