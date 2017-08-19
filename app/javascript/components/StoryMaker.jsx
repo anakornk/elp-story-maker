@@ -15,7 +15,7 @@ class StoryMaker extends React.Component {
     this.createLink = this.createLink.bind(this);
     this.setFormSettings = this.setFormSettings.bind(this);
     this.fetchPageJson = this.fetchPageJson.bind(this);
-    this.fetchPageJson();
+    this.updateChoiceText = this.updateChoiceText.bind(this);
   }
 
   createLink(story_id,src_page_id,link_id,dst_page_id){
@@ -53,10 +53,15 @@ class StoryMaker extends React.Component {
     });
   }
 
-  componentDidMount() {
-    // var that = this;
-    // setInterval(function(){ that.setState(Object.assign({}, that.state)); }, 100);
-    var links = this.state.storiesData.links
+  updateChoiceText(pages,links){
+    // console.log(pages);
+    pages.forEach(function(page){
+      var src_name = "pid-"+ page.id;
+      var buttons = document.querySelector("." + src_name + " .buttons");
+      // console.log("." + src_name + " .buttons");
+      buttons.innerHTML = "";
+    });
+
     links.forEach(function(link){
       var src_name = "pid-"+link.src_page_id
       var buttons = document.querySelector("." + src_name + " .buttons")
@@ -72,7 +77,24 @@ class StoryMaker extends React.Component {
       button.setAttribute("data-linkid",link.id)
       // console.log(button)
       buttons.appendChild(button)
-    })
+    });
+  }
+
+  componentDidUpdate(prevProps, prevState){
+    if(this.state.storiesData != prevState.storiesData){
+      var pages = this.state.storiesData.pages
+      var links = this.state.storiesData.links;
+      this.updateChoiceText(pages,links);
+    }
+  }
+
+  componentDidMount() {
+    // var that = this;
+    // setInterval(function(){ that.setState(Object.assign({}, that.state)); }, 100);
+    var pages = this.state.storiesData.pages
+    var links = this.state.storiesData.links
+
+    this.updateChoiceText(pages,links);
 
 
     // create link with two clicks
@@ -107,6 +129,7 @@ class StoryMaker extends React.Component {
       that.setState({});
     },100);
   }
+
 
   reRender(){
     this.setState({});
