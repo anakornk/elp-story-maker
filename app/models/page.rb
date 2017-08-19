@@ -1,5 +1,5 @@
 class Page < ApplicationRecord
-  mount_uploader :image, ImageUploader
+  mount_uploader :image_video, ImageVideoUploader
 
   belongs_to :story
   has_one :story_id2, foreign_key: "root_page_id", class_name: "Story", dependent: :nullify
@@ -28,7 +28,7 @@ class Page < ApplicationRecord
       result_hash[:content] = page.content
       result_hash[:question] = page.question
       result_hash[:created_at] = page.created_at
-      result_hash[:img_url] = page.image.url
+      result_hash[:image_video_url] = page.image_video.url
       result_hash[:updated_at] = page.updated_at
       result_hash[:story_id] = page.story_id
       result_hash[:links] = page.links_to.order('links.id ASC').map do |link|

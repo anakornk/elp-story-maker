@@ -78,7 +78,7 @@ class PagesController < ApplicationController
   private
 
   def create_page_params
-    params.require(:page).permit(:label, :content,:question,:x,:y,:image)
+    params.require(:page).permit(:label, :content,:question,:x,:y,:image_video)
   end
 
   def create_links_params
@@ -86,11 +86,11 @@ class PagesController < ApplicationController
   end
 
   def update_page_params
-    params.require(:page).permit(:label,:content,:question,:x,:y,:image,links_to_attributes: [:id, :choice_text, :dst_page_id])
+    params.require(:page).permit(:label,:content,:question,:x,:y,:image_video,links_to_attributes: [:id, :choice_text, :dst_page_id])
   end
 
   def page_params
-    params.require(:page).permit(:label, :content, :image)
+    params.require(:page).permit(:label, :content, :image_video)
   end
 
 

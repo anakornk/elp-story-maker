@@ -14,6 +14,7 @@ class SubmitForm extends React.Component {
     var question = "";
     var choice0 = "";
     var choice1 = "";
+    var image_video = "";
     if(nextProps.formSettings != undefined){
       if(nextProps.formSettings.label) label = nextProps.formSettings.label;
       if(nextProps.formSettings.content) content = nextProps.formSettings.content;
@@ -27,6 +28,7 @@ class SubmitForm extends React.Component {
     this.question.value = question;
     this.choice0.value = choice0;
     this.choice1.value = choice1;
+    this.image_video.value = image_video;
 
     // console.log(nextProps);
     // console.log("hi");
@@ -47,7 +49,7 @@ class SubmitForm extends React.Component {
     var question = this.question.value;
     var choice0 = this.choice0.value;
     var choice1 = this.choice1.value;
-    var image = this.image.files[0];
+    var image_video = this.image_video.files[0];
 
     var path;
     var method;
@@ -68,7 +70,7 @@ class SubmitForm extends React.Component {
     formData.append("page[label]",label);
     formData.append("page[content]",content);
     formData.append("page[question]",question);
-    formData.append("page[image]",image);
+    formData.append("page[image_video]",image_video);
 
     if(editPageId){
       formData.append("page[links_to_attributes][][id]",this.props.formSettings.choice0Id);
@@ -136,7 +138,7 @@ class SubmitForm extends React.Component {
                 </label>
                 <label>
                   Image/Video:<br/>
-                  <input type="file" ref={(input) => this.image = input}  />
+                  <input type="file" ref={(input) => this.image_video = input}  />
                 </label>
                 <label>
                   MP3:<br/>
