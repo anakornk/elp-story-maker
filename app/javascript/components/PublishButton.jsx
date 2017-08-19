@@ -5,13 +5,17 @@ class PublishButton extends React.Component {
     super(props);
     this.handleClick = this.handleClick.bind(this);
     this.changeStoryStatus = this.changeStoryStatus.bind(this);
-    console.log(this.props.published)
+    // console.log(this.props.published)
     this.state = {published: this.props.published}
     // console.log(this.state.published);
   }
 
   handleClick(e){
-    this.changeStoryStatus();
+    if(document.querySelector(".window-title-active")){
+      this.changeStoryStatus();
+    }else{
+      alert('Please set a root page');
+    }
   }
 
   changeStoryStatus(){
