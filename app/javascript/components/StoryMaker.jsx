@@ -9,10 +9,13 @@ class StoryMaker extends React.Component {
 
   constructor(props){
     super(props)
-    this.state = {formSettings:{}};
+    this.state = {formSettings:{}, storiesData: props};
+    console.log(this.state);
     this.reRender = this.reRender.bind(this);
     this.createLink = this.createLink.bind(this);
     this.setFormSettings = this.setFormSettings.bind(this);
+    this.fetchPageJson = this.fetchPageJson.bind(this);
+    this.fetchPageJson();
   }
 
   createLink(story_id,src_page_id,link_id,dst_page_id){
@@ -43,7 +46,7 @@ class StoryMaker extends React.Component {
     })
     .then(function(data) {
       console.log(data)
-      location.reload();
+      that.fetchPageJson();
     })
     .catch(function(error){
       alert("Oops something is wrong:" + error);
@@ -53,7 +56,7 @@ class StoryMaker extends React.Component {
   componentDidMount() {
     // var that = this;
     // setInterval(function(){ that.setState(Object.assign({}, that.state)); }, 100);
-    var links = this.props.links
+    var links = this.state.storiesData.links
     links.forEach(function(link){
       var src_name = "pid-"+link.src_page_id
       var buttons = document.querySelector("." + src_name + " .buttons")
@@ -84,7 +87,7 @@ class StoryMaker extends React.Component {
         // console.log("is window");
         // console.log(e.target.parentNode.classList[1])
         if(that.lastIsButton){
-          var story_id = that.props.story_id
+          var story_id = that.state.storiesData.story_id
           var src_page_id = that.lastObj.getAttribute("data-pageid")
           var link_id =  that.lastObj.getAttribute("data-linkid")
           var dst_page_id = e.target.parentNode.getAttribute("data-pageid")
@@ -114,13 +117,45 @@ class StoryMaker extends React.Component {
     this.setState({formSettings:formSettings});
   }
 
+  fetchPageJson(){
+    var headers = new Headers();
+    headers.set('Accept','application/json');
+    var csrfToken = $('meta[name=csrf-token]').attr('content');
+    headers.set('X-CSRF-Token',csrfToken)
+
+    var that = this;
+    var url = '/stories/'+ this.state.storiesData.story_id;
+
+    var fetchOptions = {
+      method: 'GET',
+      headers,
+      credentials: 'same-origin'
+    };
+
+    fetch(url,fetchOptions)
+    .then(function(response) {
+      if (response.status >= 400) {
+        throw new Error("Bad response from server");
+      }
+      return response.json();
+    })
+    .then(function(data) {
+      console.log(data)
+      // location.reload();
+      that.setState({storiesData:data})
+    })
+    .catch(function(error){
+      alert("Oops something is wrong:" + error);
+    });
+  }
+
   render(){
     var that = this;
 
 
     //DragBoxes
     // pages set up
-    var pages = this.props.pages
+    var pages = this.state.storiesData.pages
     // console.log(pages)
 
     // pages = pages.sort(function(page1,page2){
@@ -131,16 +166,16 @@ class StoryMaker extends React.Component {
       //name is used to draw lines and is id of edit
       var name = "pid-"+ page.id;
       var isRootPage = false;
-      if(page.id == that.props.root_page_id){
+      if(page.id == that.state.storiesData.root_page_id){
         isRootPage = true;
       }
       return (
-        <DragBox storyId={that.props.story_id} settings={page} isRootPage={isRootPage} name={name} key={name} onMove={that.reRender} onEditClick={that.setFormSettings}/>
+        <DragBox storyId={that.state.storiesData.story_id} settings={page} isRootPage={isRootPage} name={name} key={name} onMove={that.reRender} onEditClick={that.setFormSettings}/>
       );
     });
 
     //Links / Draw Lines
-    var links = this.props.links;
+    var links = this.state.storiesData.links;
     links = links.filter(function(link){
       return link.dst_page_id != null
     });
@@ -158,7 +193,7 @@ class StoryMaker extends React.Component {
 
     return (
       <div className="story-maker">
-        <SubmitForm storyId={this.props.story_id} formSettings={this.state.formSettings}/>
+        <SubmitForm storyId={this.state.storiesData.story_id} formSettings={this.state.formSettings} submitSuccess={this.fetchPageJson}/>
         <ShowFormButton buttonId="add-btn" defaultFormSettings={{}} onClick={this.setFormSettings}>
           <span id="add-btn">&nbsp;&#x271A;&nbsp;</span>
         </ShowFormButton>

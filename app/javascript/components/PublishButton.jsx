@@ -5,7 +5,7 @@ class PublishButton extends React.Component {
     super(props);
     this.handleClick = this.handleClick.bind(this);
     this.changeStoryStatus = this.changeStoryStatus.bind(this);
-    console.log(this.props.published)
+    // console.log(this.props.published)
     this.state = {published: this.props.published}
     // console.log(this.state.published);
   }

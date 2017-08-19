@@ -60,6 +60,8 @@ class SubmitForm extends React.Component {
       path = '/stories/' + this.props.storyId +'/pages';
     }
 
+    var that = this;
+
     var formData = new FormData();
     // formData.append("utf8","✓");
     // formData.append("authenticity_token",csrfToken);
@@ -101,7 +103,9 @@ class SubmitForm extends React.Component {
       modal.style.display = "none";
       // console.log(data);
       console.log(data);
-      location.reload();
+      // location.reload();
+      // alert(data);
+      that.props.submitSuccess();
     })
     .catch(function(error){
       alert("Oops something is wrong:" + error);
