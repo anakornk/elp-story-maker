@@ -96,7 +96,7 @@ class DragBox extends React.Component {
   }
 
   deletePage(){
-    if(!confirm("Are you sure you want to delte this page?")) {
+    if(!confirm("Are you sure you want to delete this page?")) {
       return;
     }
     var headers = new Headers();
@@ -113,7 +113,7 @@ class DragBox extends React.Component {
       credentials: 'same-origin'
     };
 
-    console.log(url);
+    // console.log(url);
 
     fetch(url,fetchOptions)
     .then(function(response) {
@@ -124,8 +124,12 @@ class DragBox extends React.Component {
     })
     .then(function(data) {
       // console.log(data);
-      console.log("delete node success");
-      document.location.reload();
+      // console.log("delete node success");
+      if(data.status == "success"){
+        document.location.reload();
+      }else{
+        alert(data.message);
+      }
     })
     .catch(function(error){
       alert("Oops something is wrong:" + error);

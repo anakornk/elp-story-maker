@@ -49,17 +49,22 @@ class PagesController < ApplicationController
       #redirect_to story_path(@story)
       render json: {status:"succeed"}.to_json
     else
-      render json: {status:"fail"}.to_json
+      render json: {status:"error",message:"cannot update"}.to_json
     end
   end
 
   def destroy
     @page = Page.find(params[:id])
     authorize @page
+    if @page.story.root_page_id == @page.id && @page.story.published
+      render json: {status: "error", message: "Cannot delete root page of the story, please unpublish first" }
+      return
+    end
+
     if @page.destroy
       render json: {status: "success"}
     else
-      render json: {status: "fail"}
+      render json: {status: "error", message:"failed to destroy"}
     end
   end
 
