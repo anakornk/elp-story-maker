@@ -237,9 +237,6 @@ class DragBox extends React.Component {
           onStop={this.handleStop}
           >
           <div className={`block ${className} window`} data-pageid={pageId}>
-                <div className="tooltip">
-                  Hover over me
-                </div>
             <div className={window_title_className}>
               {windowTitle}
             </div>
