@@ -4,7 +4,7 @@ class StoryImageUploadBox extends React.Component {
   constructor(props){
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.state = {imgUrl: props.image.url};
+    this.state = {imageUrl: props.image.url};
   }
 
   componentDidMount() {
@@ -103,6 +103,7 @@ class StoryImageUploadBox extends React.Component {
             <img id="img01" width="300px" height="300px"/>
             <form onSubmit={this.handleSubmit} className="form-popup">
               <label>
+                Upload new image:
                 <input type="file" ref={(input) => this.image = input}  />
               </label>
               <input type="submit" value="Submit" />
