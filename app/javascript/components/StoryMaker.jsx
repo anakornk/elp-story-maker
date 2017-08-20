@@ -219,6 +219,9 @@ class StoryMaker extends React.Component {
 
     return (
       <div className="story-maker">
+        <div id='ajax_loader'>
+            <img src="http://code.jquery.com/mobile/1.3.1/images/ajax-loader.gif"></img>
+        </div>
         <SubmitForm storyId={this.state.storiesData.story_id} formSettings={this.state.formSettings} submitSuccess={this.fetchPageJson}/>
         <ShowFormButton buttonId="add-btn" defaultFormSettings={{}} onClick={this.setFormSettings}>
           <span id="add-btn">&nbsp;&#x271A;&nbsp;</span>
