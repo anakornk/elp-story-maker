@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: elp-story-maker_production
-  username: elp
+  username: elp-story-maker
   password: <%= ENV['ELP-STORY-MAKER_DATABASE_PASSWORD'] %>
