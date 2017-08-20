@@ -195,7 +195,7 @@ class StoryMaker extends React.Component {
       return (
         <DragBox storyId={that.state.storiesData.story_id} settings={page} isRootPage={isRootPage}
         name={name} key={name} onMove={that.reRender} onEditClick={that.setFormSettings}
-        updatedRoot={that.fetchPageJson}
+        onUpdate={that.fetchPageJson}
         />
       );
     });

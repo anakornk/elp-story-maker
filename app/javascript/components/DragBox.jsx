@@ -87,7 +87,7 @@ class DragBox extends React.Component {
     })
     .then(function(data) {
       // console.log(data);
-      that.props.updatedRoot();
+      that.props.onUpdate();
       console.log("update root_page_id success");
     })
     .catch(function(error){
@@ -126,7 +126,7 @@ class DragBox extends React.Component {
       // console.log(data);
       // console.log("delete node success");
       if(data.status == "success"){
-        document.location.reload();
+        that.props.onUpdate();
       }else{
         alert(data.message);
       }
