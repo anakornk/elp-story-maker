@@ -113,7 +113,7 @@ class StoryEditorBar extends React.Component {
           <option value="young">Young</option>
           <option value="old">Old</option>
         </select>
-        <input type="text" id="editable-title" value={this.state.textValue} onFocus={this.handleFocus} onChange={this.handleTextChange} onBlur={this.handleBlur} />
+        <input type="text" id="editable-title" value={this.state.textValue} onFocus={this.handleFocus} onChange={this.handleTextChange} onBlur={this.handleBlur}/>
       </form>
     );
   }
