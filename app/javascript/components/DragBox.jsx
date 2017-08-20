@@ -178,7 +178,6 @@ class DragBox extends React.Component {
     var pageId = this.props.settings.id;
     // var imgUrl = this.props.image.url;
 
-    //fix this
     var imageVideoUrl = this.props.settings.image_video.url;
     var imageVideo = "";
     if(imageVideoUrl){
@@ -187,14 +186,29 @@ class DragBox extends React.Component {
       if(['jpg','png','jpeg'].includes(fileExtension.toLowerCase())){
         //is image
         imageVideo = (
+          <label>
           <img src={imageVideoUrl} alt="" width="100px" height="100px"/>
+          </label>
         );
       }else {
         imageVideo = (
+           <label>
           <video width="320" height="240" controls src={imageVideoUrl}></video>
+          </label>
         );
       }
     }
+
+    var audioUrl = this.props.settings.audio.url;
+    var audio = "";
+    if(audioUrl){
+      audio = (
+        <label>
+        <audio src={audioUrl} controls></audio>
+        </label>
+      );
+    }
+
 
     var question = this.props.settings.question;
 
@@ -234,6 +248,8 @@ class DragBox extends React.Component {
                 {content}
               </div>
               {imageVideo}
+              <hr className="window-split"/>
+              {audio}
               <hr className="window-split"/>
               <div className="question">
                 {question}
