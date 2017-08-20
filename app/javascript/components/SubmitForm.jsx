@@ -39,6 +39,12 @@ class SubmitForm extends React.Component {
   handleSubmit(event) {
 
     event.preventDefault()
+
+    //show loader
+    var ajaxLoader = document.querySelector("#ajax_loader");
+    ajaxLoader.style.display = "block";
+
+
     var headers = new Headers();
     headers.set('Accept','application/json');
     //headers.set('Content-Type', 'application/json');
@@ -113,9 +119,12 @@ class SubmitForm extends React.Component {
       // location.reload();
       // alert(data);
       that.props.submitSuccess();
+      ajaxLoader.style.display = "none";
+
     })
     .catch(function(error){
       alert("Oops something is wrong:" + error);
+      ajaxLoader.style.display = "none";
       //location.reload();
     });
 

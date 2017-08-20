@@ -4,6 +4,7 @@ class StoryImageUploadBox extends React.Component {
   constructor(props){
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {imgUrl: props.image.url};
   }
 
   componentDidMount() {
@@ -32,6 +33,11 @@ class StoryImageUploadBox extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
+
+    //show loader
+    var ajaxLoader = document.querySelector("#ajax_loader");
+    ajaxLoader.style.display = "block";
+
     var headers = new Headers();
     headers.set('Accept','application/json');
     //headers.set('Content-Type', 'application/json');
@@ -46,6 +52,7 @@ class StoryImageUploadBox extends React.Component {
     var formData = new FormData();
     formData.append("story[image]",image);
 
+    var that = this;
 
     var fetchOptions = {
       method: method,
@@ -64,11 +71,18 @@ class StoryImageUploadBox extends React.Component {
     .then(function(data) {
       var modal = document.getElementById('imageBoxModal');
       modal.style.display = "none";
-      //console.log(data);
-      location.reload();
+      // console.log(data);
+      //location.reload();
+      if(data.status == "success"){
+        that.setState({imageUrl: data.story.image.url});
+      }else{
+        alert(data.message);
+      }
+      ajaxLoader.style.display = "none";
     })
     .catch(function(error){
       alert("Oops something is wrong:" + error);
+      ajaxLoader.style.display = "none";
     });
 
 
@@ -77,8 +91,8 @@ class StoryImageUploadBox extends React.Component {
 
   render(){
     var imgUrl = "https://www.baidu.com/img/bd_logo1.png"
-    if(this.props.image.url){
-      imgUrl = this.props.image.url
+    if(this.state.imageUrl){
+      imgUrl = this.state.imageUrl;
     }
     return (
       <div>

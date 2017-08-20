@@ -33,12 +33,26 @@ class StoriesController < ApplicationController
     # publish or update story info
     @story = Story.find(params[:id])
     authorize @story
+    json = {}
     if @story.root_page_id
-      @story.update(story_params)
+      if @story.update(story_params)
+        json[:status] = "success"
+        json[:story] = @story
+      else
+        json[:status] = "error"
+        json[:message] = "cannot update"
+      end
     else
-      @story.update(story_no_published_params)
+      if @story.update(story_no_published_params)
+        json[:status] = "success"
+        json[:story] = @story
+      else
+        json[:status] = "error"
+        json[:message] = "cannot update"
+      end
     end
-    render json: @story
+
+    render json: json
   end
 
   def create
