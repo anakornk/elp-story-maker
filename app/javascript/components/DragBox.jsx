@@ -190,7 +190,6 @@ class DragBox extends React.Component {
           <img src={imageVideoUrl} alt="" width="100px" height="100px"/>
         );
       }else {
-        var type = "video/" + fileExtension.toLowerCase();
         imageVideo = (
           <video width="320" height="240" controls src={imageVideoUrl}></video>
         );
