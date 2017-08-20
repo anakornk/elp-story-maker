@@ -15,7 +15,11 @@ class DragBox extends React.Component {
     // console.log(props)
     this.state = {position:{x: props.settings.x,y: props.settings.y}}
   }
-
+  componentDidMount() {
+    $(document).ready(function(){
+      $('[data-toggle="tooltip"]').tooltip();
+    });
+  }
 
   updatePosition(x,y) {
     var headers = new Headers();
@@ -233,18 +237,19 @@ class DragBox extends React.Component {
           onStop={this.handleStop}
           >
           <div className={`block ${className} window`} data-pageid={pageId}>
+                <div className="tooltip">
+                  Hover over me
+                </div>
             <div className={window_title_className}>
               {windowTitle}
             </div>
             <div  className="window-body">
-              <div className="flex-horizontal">
+              <div className="flex-horizontal flex-end toolbar">
+                <i onClick={this.updateStoryRootPage} className="fa fa-tree toolbar-item" aria-hidden="true" data-toggle="tooltip" title="Set as Root Page"></i>
                 <ShowFormButton buttonId={className} defaultFormSettings={defaultFormSettings} onClick={this.props.onEditClick}>
-                  <span id={className} className="button-edit">Edit</span>
+                  <i id={className} className="fa fa-pencil toolbar-item button-edit" aria-hidden="true" data-toggle="tooltip" title="Edit"></i>
                 </ShowFormButton>
-                  |
-                <div onClick={this.updateStoryRootPage}>Root</div>
-                  |
-                <div onClick={this.deletePage}>&#10007;</div>
+                <i onClick={this.deletePage} className="fa fa-trash toolbar-item" aria-hidden="true" data-toggle="tooltip" title="Delete"></i>
               </div>
 
               <hr className="window-split"/>

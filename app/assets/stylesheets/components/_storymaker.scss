@@ -1,5 +1,4 @@
 .block {
-  cursor: pointer;
 /*  text-align: center
 */
   width: 350px;
@@ -8,10 +7,11 @@
   justify-content: space-between;
   align-items: stretch;
   z-index: 0;
+  background-color: white;
 }
 
 .window {
-  border-radius: 10px;
+  border-radius: 4px;
 }
 
 .window-title {
@@ -20,6 +20,8 @@
   background-color: #24292E;
   color: white;
   text-align: center;
+  cursor: pointer;
+
 }
 
 .window-title-active {
@@ -43,6 +45,21 @@
 
 }
 
+.toolbar {
+
+}
+
+.toolbar-item {
+  cursor: pointer;
+  margin: 0px 10px;
+  color: RGBA(34, 34, 34, 1.00);
+
+}
+.toolbar-item:hover {
+  color: RGBA(51, 51, 51, 0.9);
+
+}
+
 .buttons {
   display: flex;
   justify-content: space-around;
@@ -50,16 +67,22 @@
 }
 
 .button {
-  background-color:#2A333C;
+  background-color: RGBA(34, 34, 34, 1.00);
   padding: 5px;
   margin: 5px;
   color: white;
   border-radius: 4px;
+  cursor: pointer;
+}
+.button:hover {
+  background-color: RGBA(51, 51, 51, 0.9);
 }
 
 .button-hang {
   border-top: 3px solid rgba(0,0,0,0.1);
 }
+
+
 .content {
   padding: 10px;
   color: black;
@@ -92,10 +115,12 @@
 }
 
 #add-btn:hover {
-
-  background-color: RGBA(51, 51, 51, 1.00);
+  background-color: RGBA(51, 51, 51, 0.9);
 }
 
 .story-maker {
   position: relative;
 }
+
+
+
