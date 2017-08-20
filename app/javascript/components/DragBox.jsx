@@ -177,7 +177,26 @@ class DragBox extends React.Component {
     var defaultFormSettings = this.props.settings;
     var pageId = this.props.settings.id;
     // var imgUrl = this.props.image.url;
-    var imgUrl = this.props.settings.image_video.url;
+
+    //fix this
+    var imageVideoUrl = this.props.settings.image_video.url;
+    var imageVideo = "";
+    if(imageVideoUrl){
+      var arr = imageVideoUrl.split('.');
+      var fileExtension = arr[arr.length-1];
+      if(['jpg','png','jpeg'].includes(fileExtension.toLowerCase())){
+        //is image
+        imageVideo = (
+          <img src={imageVideoUrl} alt="" width="100px" height="100px"/>
+        );
+      }else {
+        var type = "video/" + fileExtension.toLowerCase();
+        imageVideo = (
+          <video width="320" height="240" controls src={imageVideoUrl}></video>
+        );
+      }
+    }
+
     var question = this.props.settings.question;
 
     var window_title_className = "handle window-title";
@@ -215,7 +234,7 @@ class DragBox extends React.Component {
               <div className="content">
                 {content}
               </div>
-              <img src={imgUrl} alt="" width="100px" height="100px"/>
+              {imageVideo}
               <hr className="window-split"/>
               <div className="question">
                 {question}
