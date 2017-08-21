@@ -19,13 +19,11 @@
     <%= yield %>
     <%= javascript_include_tag 'application' %>
     <script>
-      alerts = document.querySelectorAll(".alert");
-      for(var i=0;i<alerts.length;i++){
-          var that = alerts[i];
-          setTimeout(function(){
-            that.parentNode.removeChild(that);
-          },1000)
-      }
+      window.setTimeout(function() {
+        $(".alert").fadeTo(1000, 0).slideUp(1000, function(){
+          $(this).remove();
+        })
+      });
     </script>
   </body>
 </html>
