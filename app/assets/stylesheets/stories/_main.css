@@ -9,8 +9,9 @@
 .story-card {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
+
   margin: 10px;
   background-color: #E5F3F4;
   width: 200px;
@@ -21,9 +22,16 @@
 
 }
 
+.story-card .btn-delete {
+  align-self: flex-end;
+  margin-right: 10px;
+  margin-top: 10px;
+
+}
+
 .story-card .title {
   color: white;
-  margin: 10px;
+  margin: 120px 10px 10px 10px;
 }
 
 a:hover {

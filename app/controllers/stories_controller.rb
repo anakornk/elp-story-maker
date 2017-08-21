@@ -22,11 +22,13 @@ class StoriesController < ApplicationController
   def destroy
     @story = Story.find(params[:id])
     authorize @story
-    if @story.destroy
-      render json: {status: "success"}
-    else
-      render json: {status: "failed"}
-    end
+    # if @story.destroy
+    #   render json: {status: "success"}
+    # else
+    #   render json: {status: "failed"}
+    # end
+    @story.destroy
+    redirect_to stories_path
   end
 
   def update
