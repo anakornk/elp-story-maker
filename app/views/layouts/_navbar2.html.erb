@@ -23,7 +23,8 @@
           <!-- <li><a href="#">Log Out</a></li> -->
           <!-- <a href="/users/sign_out">log out</a> -->
           <li><%= link_to 'Sign in', user_session_path unless signed_in? %></li>
-          <li><%= link_to 'Sign out now!!!', destroy_user_session_path if signed_in? %></li>
+          <li><%= link_to 'View All Stories', stories_path if signed_in? %></li>
+          <li><%= link_to 'Sign out', destroy_user_session_path if signed_in? %></li>
         </ul>
       </div>
     </div>
