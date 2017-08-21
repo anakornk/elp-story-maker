@@ -12,6 +12,9 @@ class Page < ApplicationRecord
   has_many :children, through: :links_to, source: :child
   has_many :parents, through: :links_from, source: :parent
 
+  # validates :audio, presence: true
+  # validates :image_video, presence: true
+  validates :content, presence: true
 
   accepts_nested_attributes_for :links_to
   # src page destoryed - links should be destroyed

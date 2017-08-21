@@ -212,6 +212,7 @@ class DragBox extends React.Component {
     if(audioUrl){
       audio = (
         <label>
+        Sound Effect:
         <audio src={audioUrl} controls></audio>
         </label>
       );
@@ -254,9 +255,9 @@ class DragBox extends React.Component {
                 {content}
               </div>
               {imageVideo}
-              <hr className="window-split"/>
+              { imageVideo != "" ? (<hr className="window-split"/>) : null}
               {audio}
-              <hr className="window-split"/>
+              { audio != "" ? (<hr className="window-split"/>): null}
               <div className="question">
                 {question}
               </div>

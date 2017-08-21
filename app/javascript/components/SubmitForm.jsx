@@ -113,13 +113,18 @@ class SubmitForm extends React.Component {
     })
     .then(function(data) {
       var modal = document.getElementById('myModal');
-      modal.style.display = "none";
       // console.log(data);
       console.log(data);
       // location.reload();
       // alert(data);
-      that.props.submitSuccess();
       ajaxLoader.style.display = "none";
+      if(data.status =="success"){
+        modal.style.display = "none";
+        that.props.submitSuccess();
+      }else {
+        alert(data.message);
+      }
+
 
     })
     .catch(function(error){
