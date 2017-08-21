@@ -32,9 +32,9 @@ ActiveRecord::Schema.define(version: 20170819165615) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "story_id"
+    t.string "image"
     t.integer "x"
     t.integer "y"
-    t.string "image"
     t.string "image_video"
     t.string "audio"
     t.index ["story_id"], name: "index_pages_on_story_id"
