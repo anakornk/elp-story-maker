@@ -8,8 +8,8 @@
           <i class="fa fa-trash"></i>
         <% end %>
 
-        <%= link_to story_path(story) do %>
-          <div class="title"><%= story.title  %></div>
+        <%= link_to story_path(story),:class => "title" do %>
+          <%= story.title  %>
         <% end %>
 
         <% if false %>

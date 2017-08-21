@@ -34,7 +34,13 @@
 
 .story-card .title {
   color: white;
-  margin: 120px 10px 10px 10px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 10px;
 }
 
 a:hover {
