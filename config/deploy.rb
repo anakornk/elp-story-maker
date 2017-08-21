@@ -74,7 +74,7 @@ task :deploy => :environment do
 
     to :launch do
       invoke :'deploy:cleanup'
-      queue "supervisorctl restart elp:elp-web-1"
+      queue "sudo supervisorctl restart elp:elp-web-1"
     end
   end
 end
