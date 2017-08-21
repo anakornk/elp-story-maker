@@ -1,7 +1,7 @@
 class StoriesController < ApplicationController
 
   def index
-    @stories = policy_scope(Story)
+    @stories = policy_scope(Story).order('LOWER(title) ASC')
   end
 
   def show

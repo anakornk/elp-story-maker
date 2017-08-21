@@ -26,7 +26,10 @@
   align-self: flex-end;
   margin-right: 10px;
   margin-top: 10px;
-
+  color: white;
+}
+.story-card .btn-delete:hover {
+  color: grey;
 }
 
 .story-card .title {
