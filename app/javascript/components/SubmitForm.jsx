@@ -113,13 +113,18 @@ class SubmitForm extends React.Component {
     })
     .then(function(data) {
       var modal = document.getElementById('myModal');
-      modal.style.display = "none";
       // console.log(data);
       console.log(data);
       // location.reload();
       // alert(data);
-      that.props.submitSuccess();
       ajaxLoader.style.display = "none";
+      if(data.status =="success"){
+        modal.style.display = "none";
+        that.props.submitSuccess();
+      }else {
+        alert(data.message);
+      }
+
 
     })
     .catch(function(error){
@@ -151,11 +156,14 @@ class SubmitForm extends React.Component {
                   <textarea cols="50" rows="8" ref={(input) => this.content= input}></textarea>
                 </label>
                 <label>
-                  Image/Video:<br/>
+                  { this.props.formSettings.id ? "Update Image/Video:" :  "Image/Video:"}
+                  <br/>
                   <input type="file" ref={(input) => this.image_video = input}  />
                 </label>
                 <label>
-                  Sound:<br/>
+
+                  { this.props.formSettings.id ? "Update Sound:" :  "Sound:"}
+                  <br/>
                   <input type="file" ref={(input) => this.audio = input}  />
                 </label>
                 <label>

@@ -12,7 +12,7 @@ class StoryImageUploadBox extends React.Component {
     var modal = document.getElementById('imageBoxModal');
 
     // Get the image and insert it inside the modal - use its "alt" text as a caption
-    var img = document.getElementById('myImg');
+    var img = document.getElementById('storyImg');
     var modalImg = document.getElementById("img01");
     var captionText = document.getElementById("caption");
     img.addEventListener('click',function(){
@@ -96,7 +96,7 @@ class StoryImageUploadBox extends React.Component {
     }
     return (
       <div>
-        <img id="myImg" src={imgUrl} alt={this.props.title} width="50" height="50" />
+        <img id="storyImg" src={imgUrl} alt={this.props.title} width="50" height="50" />
         <div id="imageBoxModal" className="modal">
           <div className="modal-content flex-vertical">
             <span id="close2">&times;</span>

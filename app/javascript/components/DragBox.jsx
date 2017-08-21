@@ -13,7 +13,7 @@ class DragBox extends React.Component {
     this.deletePage = this.deletePage.bind(this);
     // console.log("start")
     // console.log(props)
-    this.state = {position:{x: props.settings.x,y: props.settings.y}}
+    this.state = {position:{x: props.settings.x,y: props.settings.y},isDeleted: false}
   }
   componentDidMount() {
     $(document).ready(function(){
@@ -130,6 +130,7 @@ class DragBox extends React.Component {
       // console.log(data);
       // console.log("delete node success");
       if(data.status == "success"){
+        that.setState({isDeleted:true});
         that.props.onUpdate();
       }else{
         alert(data.message);
@@ -212,6 +213,7 @@ class DragBox extends React.Component {
     if(audioUrl){
       audio = (
         <label>
+        Sound Effect:
         <audio src={audioUrl} controls></audio>
         </label>
       );
@@ -223,6 +225,9 @@ class DragBox extends React.Component {
     var window_title_className = "handle window-title";
     if(this.props.isRootPage){
       window_title_className += " window-title-active";
+    }
+    if(this.state.isDeleted){
+      return null;
     }
 
     return(
@@ -254,7 +259,6 @@ class DragBox extends React.Component {
                 {content}
               </div>
               {imageVideo}
-              <hr className="window-split"/>
               {audio}
               <hr className="window-split"/>
               <div className="question">

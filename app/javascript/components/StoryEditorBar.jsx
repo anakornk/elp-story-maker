@@ -66,6 +66,7 @@ class StoryEditorBar extends React.Component {
     .then(function(data) {
       // console.log(data);
       console.log("update title success");
+      document.getElementById('storyImg').setAttribute('alt',title);
     })
     .catch(function(error){
       that.setState({textValue:that.beforeTextValue});

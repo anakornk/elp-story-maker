@@ -101,10 +101,14 @@ class StoryMaker extends React.Component {
     var that = this;
     document.body.addEventListener('click',function(e){
       // console.log(e);
+      if(that.lastIsButton){
+        that.lastObj.style.backgroundColor = "#222222";
+      }
       if(e.target.classList.contains('button')){
         // console.log("is button");
         that.lastObj = e.target
         that.lastIsButton = true;
+        e.target.style.backgroundColor = "#C52F24";
       }else if(e.target.classList.contains('window-title')){
         // console.log("is window");
         // console.log(e.target.parentNode.classList[1])

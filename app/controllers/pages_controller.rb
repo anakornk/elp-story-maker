@@ -32,7 +32,7 @@ class PagesController < ApplicationController
       #redirect_to story_path(@story)
       render json: {status: "success"}
     else
-      render json: {status:"fail"}
+      render json: {status:"error", message: @page.errors.full_messages}
     end
   end
 
@@ -47,9 +47,9 @@ class PagesController < ApplicationController
     @page.update(update_page_params)
     if @page.save
       #redirect_to story_path(@story)
-      render json: {status:"succeed"}.to_json
+      render json: {status:"success"}.to_json
     else
-      render json: {status:"error",message:"cannot update"}.to_json
+      render json: {status:"error",message: @page.errors.full_messages}.to_json
     end
   end
 
