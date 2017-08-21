@@ -15,6 +15,7 @@ class Page < ApplicationRecord
   # validates :audio, presence: true
   # validates :image_video, presence: true
   validates :content, presence: true
+  validates :label, presence: true
 
   accepts_nested_attributes_for :links_to
   # src page destoryed - links should be destroyed
