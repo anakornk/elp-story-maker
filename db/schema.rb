@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170819165615) do
+ActiveRecord::Schema.define(version: 20170822084722) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,7 +32,6 @@ ActiveRecord::Schema.define(version: 20170819165615) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "story_id"
-    t.string "image"
     t.integer "x"
     t.integer "y"
     t.string "image_video"
@@ -48,6 +47,7 @@ ActiveRecord::Schema.define(version: 20170819165615) do
     t.datetime "updated_at", null: false
     t.boolean "published", default: false, null: false
     t.string "image"
+    t.integer "likes_count", default: 0, null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -65,6 +65,14 @@ ActiveRecord::Schema.define(version: 20170819165615) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "wechatusers", force: :cascade do |t|
+    t.string "third_session"
+    t.string "session_key"
+    t.string "openid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "pages", "stories"
