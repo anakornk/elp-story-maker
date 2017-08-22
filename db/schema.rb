@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170819165615) do
+ActiveRecord::Schema.define(version: 20170822134034) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "likes", force: :cascade do |t|
+    t.bigint "story_id"
+    t.bigint "wechatuser_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["story_id"], name: "index_likes_on_story_id"
+    t.index ["wechatuser_id"], name: "index_likes_on_wechatuser_id"
+  end
 
   create_table "links", force: :cascade do |t|
     t.integer "choice_index"
@@ -32,7 +41,6 @@ ActiveRecord::Schema.define(version: 20170819165615) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "story_id"
-    t.string "image"
     t.integer "x"
     t.integer "y"
     t.string "image_video"
@@ -48,6 +56,7 @@ ActiveRecord::Schema.define(version: 20170819165615) do
     t.datetime "updated_at", null: false
     t.boolean "published", default: false, null: false
     t.string "image"
+    t.integer "likes_count", default: 0, null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -67,5 +76,15 @@ ActiveRecord::Schema.define(version: 20170819165615) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "wechatusers", force: :cascade do |t|
+    t.string "third_session"
+    t.string "session_key"
+    t.string "openid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "likes", "stories"
+  add_foreign_key "likes", "wechatusers"
   add_foreign_key "pages", "stories"
 end

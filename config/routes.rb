@@ -24,9 +24,13 @@ Rails.application.routes.draw do
   # end
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
+      get "wechatusers/",to: "wechatusers#index"
+      get "wechatusers/login",to: "wechatusers#login"
       resources :stories, only: [ :index ] do
         resources :pages, only: [ :show ]
       end
+      post "stories/:id/like",to: "stories#like"
+
     end
   end
 

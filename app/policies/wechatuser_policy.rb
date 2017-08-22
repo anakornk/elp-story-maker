@@ -1,4 +1,4 @@
-class StoryPolicy < ApplicationPolicy
+class WechatuserPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       scope.all
@@ -25,7 +25,4 @@ class StoryPolicy < ApplicationPolicy
     true
   end
 
-  def like?
-    true
-  end
 end
