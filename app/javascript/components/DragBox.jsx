@@ -196,13 +196,13 @@ class DragBox extends React.Component {
         //is image
         imageVideo = (
           <label>
-          <img src={imageVideoUrl} alt="" width="100px" height="100px"/>
+          <img src={imageVideoUrl} alt="" />
           </label>
         );
       }else {
         imageVideo = (
            <label>
-          <video width="320" height="240" controls src={imageVideoUrl}></video>
+          <video controls src={imageVideoUrl}></video>
           </label>
         );
       }

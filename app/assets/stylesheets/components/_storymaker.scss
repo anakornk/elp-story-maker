@@ -23,6 +23,15 @@
   cursor: pointer;
 
 }
+.window img {
+  width: auto;
+  height: 150px;
+}
+
+.window video {
+  width:320px;
+  height:240px;
+}
 
 .window-title-active {
   background-color: RGBA(197, 47, 36, 1.00);
