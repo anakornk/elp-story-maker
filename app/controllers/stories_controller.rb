@@ -61,7 +61,7 @@ class StoriesController < ApplicationController
     if params.key? :story
       whitelisted_params = story_params
     else
-      whitelisted_params = {title:"Default Story Title",category:"Young"}
+      whitelisted_params = {title:"Default Story Title",category:"young"}
     end
     @story = Story.new(whitelisted_params)
     authorize @story

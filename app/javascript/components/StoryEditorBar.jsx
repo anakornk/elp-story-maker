@@ -107,6 +107,7 @@ class StoryEditorBar extends React.Component {
     });
   }
 
+
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
