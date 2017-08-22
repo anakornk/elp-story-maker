@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170822084722) do
+ActiveRecord::Schema.define(version: 20170822134034) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "likes", force: :cascade do |t|
+    t.bigint "story_id"
+    t.bigint "wechatuser_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["story_id"], name: "index_likes_on_story_id"
+    t.index ["wechatuser_id"], name: "index_likes_on_wechatuser_id"
+  end
 
   create_table "links", force: :cascade do |t|
     t.integer "choice_index"
@@ -75,5 +84,7 @@ ActiveRecord::Schema.define(version: 20170822084722) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "likes", "stories"
+  add_foreign_key "likes", "wechatusers"
   add_foreign_key "pages", "stories"
 end
