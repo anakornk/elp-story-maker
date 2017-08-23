@@ -142,7 +142,7 @@ class SubmitForm extends React.Component {
         <div id='myModal' className="modal">
           <div className="window modal-content">
             <div className="window-title">
-              Yo
+              {this.props.formSettings.id ? "Edit Page" : "New Page"}
               <span id="close1">&times;</span>
             </div>
             <div className="window-body">

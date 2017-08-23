@@ -1,11 +1,15 @@
 class Api::V1::StoriesController < Api::V1::BaseController
   def index
     @user = Wechatuser.find_by(third_session: params[:third_session])
+    stories = policy_scope(Story)
     if @user
-      @stories = policy_scope(Story).where('published = true').joins('LEFT OUTER JOIN likes on likes.story_id = stories.id').select('stories.*,likes.wechatuser_id as uid').where('wechatuser_id = ? or wechatuser_id is null',@user.id).order('LOWER(title) ASC')
+      @stories = stories.where('published = true').order('LOWER(title) ASC') #.joins('LEFT OUTER JOIN likes on likes.story_id = stories.id').select('stories.*,likes.wechatuser_id as uid').where('wechatuser_id is null OR wechatuser_id = ?',@user.id).order('LOWER(title) ASC')
+      @liked_stories = @user.liked_stories.order('LOWER(title) ASC')
+      @liked_stories_id = @liked_stories.map { |x| x.id }
     else
       # check if not null therefore -1 -> returns liked -> does not allow like
-      @stories = policy_scope(Story).where('published = true').select('stories.*,-1 as uid').order('LOWER(title) ASC')
+      #@stories = policy_scope(Story).where('published = true').select('stories.*,-1 as uid').order('LOWER(title) ASC')
+      render json: {error: "cannot find user"}
     end
     # Story.where('published = true').joins('LEFT OUTER JOIN likes on likes.story_id = stories.id').select('stories.*,likes.wechatuser_id as uid').where('wechatuser_id = ? or wechatuser_id is null',1)
   end
