@@ -90,10 +90,7 @@ class StoryImageUploadBox extends React.Component {
 
 
   render(){
-    var imgUrl = "https://www.baidu.com/img/bd_logo1.png"
-    if(this.state.imageUrl){
-      imgUrl = this.state.imageUrl;
-    }
+    var imgUrl = this.state.imageUrl;
     return (
       <div>
         <img id="storyImg" src={imgUrl} alt={this.props.title} width="50" height="50" />
