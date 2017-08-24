@@ -30,6 +30,7 @@ Rails.application.routes.draw do
         resources :pages, only: [ :show ]
       end
       post "stories/:id/like",to: "stories#like"
+      get "stories/:id",to: "stories#show"
 
     end
   end
