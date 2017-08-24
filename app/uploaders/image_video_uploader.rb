@@ -20,7 +20,7 @@ class ImageVideoUploader < CarrierWave::Uploader::Base
     # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
 
     # "/images/fallback/" + [version_name, "default.png"].compact.join('_')
-    "/images/elp_logo.png"
+    "/images/elp_logo_black.jpg"
 
   end
 

@@ -14,6 +14,12 @@ class Api::V1::StoriesController < Api::V1::BaseController
     # Story.where('published = true').joins('LEFT OUTER JOIN likes on likes.story_id = stories.id').select('stories.*,likes.wechatuser_id as uid').where('wechatuser_id = ? or wechatuser_id is null',1)
   end
 
+  def show
+    @story = Story.find(params[:id])
+    authorize @story
+    render json: @story
+  end
+
   def like
 
     # this whole chunk is optimizable with sql
