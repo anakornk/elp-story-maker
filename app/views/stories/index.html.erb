@@ -1,5 +1,6 @@
 <% content_for :title, "ELP Story Maker" %>
 <%= render './layouts/navbar' %>
+<div style="height:70px"></div>
 <div class="stories-container">
   <% @stories.each do |story| %>
       <% img_url = story.image.url ? story.image.url : "https://kitt.lewagon.com/placeholder/cities/berlin" %>
