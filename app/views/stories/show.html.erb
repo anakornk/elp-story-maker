@@ -1,4 +1,5 @@
 <% content_for :title, @story.title %>
 <%= render './layouts/navbar2' %>
+<div style="height:70px"></div>
 <%= react_component("StoryMaker", @json) %>
 
