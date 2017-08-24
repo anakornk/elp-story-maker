@@ -118,8 +118,8 @@
   background-color: RGBA(34, 34, 34, 1.00);
   color: white;
   cursor: pointer;
-  position: absolute;
-  top: 10px;
+  position: fixed;
+  top: 80px;
   left: 10px;
 }
 
@@ -128,7 +128,7 @@
 }
 
 .story-maker {
-  position: relative;
+  //position: relative;
 }
 
 
